@@ -1,8 +1,12 @@
-import { FC, useEffect, useState } from "react";
-import { Category } from "../../constants";
-import TriviaApi from "../../TriviaApi";
+import { ChangeEvent, FC, useEffect, useState } from "react";
+import { Category } from "../../../../constants";
+import TriviaApi from "../../../../TriviaApi";
 
-export const CategoryList: FC = () => {
+type CategoriesProps = {
+  setSelectedCategory: (arg: Category) => void;
+};
+
+export const Categories: FC<CategoriesProps> = (props) => {
   const [categories, setCategories] = useState<undefined | Category[]>(
     undefined
   );
@@ -26,9 +30,22 @@ export const CategoryList: FC = () => {
 
   const sortedCategories = categories?.sort(categoryNameSort);
 
+  const handleSelection = (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectedCategory = categories?.find(
+      (category) => category.name === e.currentTarget.value
+    );
+
+    if (!selectedCategory) return;
+
+    props.setSelectedCategory(selectedCategory);
+  };
+
   return (
     <div>
-      <select disabled={!sortedCategories}>
+      <select disabled={!sortedCategories} onChange={handleSelection}>
+        <option disabled selected>
+          -- select --
+        </option>
         {sortedCategories?.map((category) => (
           <option key={category.id}>{category.name}</option>
         ))}
