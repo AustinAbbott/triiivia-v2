@@ -6,4 +6,10 @@ export default class TriviaApi {
     const categoryObject = await result.json();
     return categoryObject.trivia_categories;
   };
+
+  public static getQuestions = async (requestUrl: string) => {
+    const result: Response = await fetch(requestUrl);
+    const questionResponseObject = await result.json();
+    return questionResponseObject.results;
+  };
 }

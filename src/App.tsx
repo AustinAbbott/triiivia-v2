@@ -6,7 +6,6 @@ import { Game } from "./views/Game";
 import { QuestionResponse } from "./constants";
 
 function App() {
-  // TODO: Add type for question
   const [questions, setQuestions] = useState<QuestionResponse[] | undefined>();
 
   return (
@@ -14,7 +13,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Setup setQuestions={setQuestions} />
-        <Game />
+        <Game questions={questions} />
       </header>
     </div>
   );

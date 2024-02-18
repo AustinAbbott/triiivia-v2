@@ -5,7 +5,7 @@ export type Category = {
   id: number;
 };
 
-export enum ModeChoices {
+export enum Modes {
   TRUE_FALSE = "True / False",
   MULTIPLE_CHOICE = "Multiple Choice",
 }

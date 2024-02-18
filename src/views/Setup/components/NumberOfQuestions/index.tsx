@@ -1,6 +1,6 @@
 // TODO: make list dynamic based on how many questions are available for a given category
-
 import { FC } from "react";
+import "../style.css";
 
 type NumberOfQuestionsProps = {
   setSelectedNumberOfQuestions: (arg: string) => void;
@@ -8,8 +8,10 @@ type NumberOfQuestionsProps = {
 
 export const NumberOfQuestions: FC<NumberOfQuestionsProps> = (props) => {
   return (
-    <div>
+    <div className="dropdown">
+      <label htmlFor="number-of-questions">Choose Number of Questions: </label>
       <select
+        id="number-of-questions"
         onChange={(e) =>
           props.setSelectedNumberOfQuestions(e.currentTarget.value)
         }

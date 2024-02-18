@@ -2,6 +2,8 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 import { Category } from "../../../../constants";
 import TriviaApi from "../../../../TriviaApi";
 
+import "../style.css";
+
 type CategoriesProps = {
   setSelectedCategory: (arg: Category) => void;
 };
@@ -41,8 +43,13 @@ export const Categories: FC<CategoriesProps> = (props) => {
   };
 
   return (
-    <div>
-      <select disabled={!sortedCategories} onChange={handleSelection}>
+    <div className="dropdown">
+      <label htmlFor="category">Choose category: </label>
+      <select
+        disabled={!sortedCategories}
+        id="category"
+        onChange={handleSelection}
+      >
         <option disabled selected>
           -- select --
         </option>

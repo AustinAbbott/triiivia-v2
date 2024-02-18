@@ -6,12 +6,12 @@ import { NumberOfQuestions } from "./components/NumberOfQuestions";
 import {
   API_BASE_URL,
   Category,
-  ModeChoices,
+  Modes,
   QuestionResponse,
 } from "../../constants";
+import TriviaApi from "../../TriviaApi";
 
 type SetupProps = {
-  // TODO: use questions type here
   setQuestions: (arg: QuestionResponse[]) => void;
 };
 
@@ -35,35 +35,37 @@ export const Setup: FC<SetupProps> = (props) => {
 
   const getSelectedModeParam = () => {
     switch (selectedMode) {
-      case ModeChoices.MULTIPLE_CHOICE:
+      case Modes.MULTIPLE_CHOICE:
         return "multiple";
-      case ModeChoices.TRUE_FALSE:
+      case Modes.TRUE_FALSE:
         return "boolean";
       default:
         return "";
     }
   };
 
-  const handleStartClick = () => {
+  const handleStartClick = async () => {
     if (!readyToGo) return;
 
-    // TODO: probably break this all out
     const requestUrl = `${API_BASE_URL}api.php?amount=${selectedNumberOfQuestions}&category=${
       selectedCategory?.id
-    }&difficulty=${selectedDifficulty.toLowerCase()}&type=${getSelectedModeParam()}`;
+    }&difficulty=${selectedDifficulty.toLowerCase()}&type=${getSelectedModeParam()}&encode=base64`;
 
-    fetch(requestUrl).then((res: Response) =>
-      props.setQuestions(res.json() as any)
-    );
+    const apiResponse = await TriviaApi.getQuestions(requestUrl);
+
+    props.setQuestions(apiResponse);
   };
 
   return (
     <div>
+      <Categories setSelectedCategory={setSelectedCategory} />
       <NumberOfQuestions
         setSelectedNumberOfQuestions={setSelectedNumberOfQuestions}
       />
-      <Categories setSelectedCategory={setSelectedCategory} />
-      <Difficulty setSelectedDifficulty={setSelectedDifficulty} />
+      <Difficulty
+        selectedDifficulty={selectedDifficulty}
+        setSelectedDifficulty={setSelectedDifficulty}
+      />
       <Mode setSelectedMode={setSelectedMode} />
 
       <button disabled={!readyToGo()} onClick={handleStartClick}>
