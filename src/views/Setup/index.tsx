@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
-import { Categories } from "./components/CategoryList";
-import { Difficulty } from "./components/Difficulty";
-import { Mode } from "./components/Mode";
+import Categories from "./components/Categories";
+import Difficulty from "./components/Difficulty";
+import Mode from "./components/Mode";
 import NumberOfQuestions from "./components/NumberOfQuestions";
 import {
   API_BASE_URL,
@@ -18,9 +18,7 @@ type SetupProps = {
 };
 
 export const Setup: FC<SetupProps> = (props) => {
-  const [selectedCategory, setSelectedCategory] = useState<
-    Category | undefined
-  >();
+  const [selectedCategory, setSelectedCategory] = useState<Category>();
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("");
   const [selectedMode, setSelectedMode] = useState<string>("");
   const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =

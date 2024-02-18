@@ -7,7 +7,7 @@ type DifficultyProps = {
   setSelectedDifficulty: (arg: string) => void;
 };
 
-export const Difficulty: FC<DifficultyProps> = (props) => {
+const Difficulty: FC<DifficultyProps> = (props) => {
   return (
     <div className="dropdown">
       <Dropdown
@@ -19,3 +19,5 @@ export const Difficulty: FC<DifficultyProps> = (props) => {
     </div>
   );
 };
+
+export default Difficulty;

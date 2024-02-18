@@ -8,7 +8,7 @@ type ModeProps = {
   setSelectedMode: (arg: string) => void;
 };
 
-export const Mode: FC<ModeProps> = (props) => {
+const Mode: FC<ModeProps> = (props) => {
   return (
     <div className="dropdown">
       <Dropdown
@@ -20,3 +20,5 @@ export const Mode: FC<ModeProps> = (props) => {
     </div>
   );
 };
+
+export default Mode;

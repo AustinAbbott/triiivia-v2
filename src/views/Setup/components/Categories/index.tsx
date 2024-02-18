@@ -10,7 +10,7 @@ type CategoriesProps = {
   setSelectedCategory: (arg: Category) => void;
 };
 
-export const Categories: FC<CategoriesProps> = (props) => {
+const Categories: FC<CategoriesProps> = (props) => {
   const [categories, setCategories] = useState<undefined | Category[]>(
     undefined
   );
@@ -58,3 +58,5 @@ export const Categories: FC<CategoriesProps> = (props) => {
     </div>
   );
 };
+
+export default Categories;
