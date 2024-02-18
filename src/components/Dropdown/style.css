@@ -1,4 +1,16 @@
-.dropdown-container {
+.drop-down-container {
+  width: 100%;
+  position: relative;
+}
+
+.drop-down-label {
+  text-align: left;
+}
+
+.drop-down-button {
+  background-color: white;
+  border: blue 1px solid;
+  height: 50px;
   width: 100%;
 }
 
@@ -6,4 +18,5 @@
   display: flex;
   flex-direction: column;
   position: absolute;
+  width: 100%;
 }
