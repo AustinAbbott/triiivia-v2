@@ -12,6 +12,7 @@ import {
 import TriviaApi from "../../TriviaApi";
 
 import "./style.css";
+import StartButton from "../../components/StartButton";
 
 type SetupProps = {
   setQuestions: (arg: QuestionResponse[]) => void;
@@ -26,10 +27,10 @@ export const Setup: FC<SetupProps> = (props) => {
 
   const readyToGo = () => {
     return (
-      selectedCategory &&
-      selectedDifficulty &&
-      selectedMode &&
-      selectedNumberOfQuestions
+      !!selectedCategory &&
+      !!selectedDifficulty &&
+      !!selectedMode &&
+      !!selectedNumberOfQuestions
     );
   };
 
@@ -72,9 +73,10 @@ export const Setup: FC<SetupProps> = (props) => {
       />
       <Mode selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
 
-      <button disabled={!readyToGo()} onClick={handleStartClick}>
-        Start
-      </button>
+      <StartButton
+        readyToGo={readyToGo()}
+        handleStartClick={handleStartClick}
+      />
     </div>
   );
 };

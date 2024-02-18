@@ -12,8 +12,8 @@ const Mode: FC<ModeProps> = (props) => {
   return (
     <div className="dropdown">
       <Dropdown
-        label="Mode"
         options={[Modes.MULTIPLE_CHOICE, Modes.TRUE_FALSE]}
+        placeholder="Mode"
         selectedOption={props.selectedMode}
         setSelectedOption={props.setSelectedMode}
       />

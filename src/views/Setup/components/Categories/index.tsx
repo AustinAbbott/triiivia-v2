@@ -50,7 +50,7 @@ const Categories: FC<CategoriesProps> = (props) => {
     <div className="dropdown">
       <Dropdown
         options={sortedCategoryNames}
-        label="Category"
+        placeholder="Category"
         selectedOption={props.selectedCategory?.name}
         setSelectedOption={handleSelection}
       />

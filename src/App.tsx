@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import { Setup } from "./views/Setup";
 import { useState } from "react";
@@ -11,7 +11,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        <h1>triiivia</h1>
         <Setup setQuestions={setQuestions} />
         <Game questions={questions} />
       </header>

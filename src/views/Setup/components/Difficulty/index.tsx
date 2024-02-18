@@ -11,8 +11,8 @@ const Difficulty: FC<DifficultyProps> = (props) => {
   return (
     <div className="dropdown">
       <Dropdown
-        label="Difficulty"
         options={["Easy", "Medium", "Hard"]}
+        placeholder="Difficulty"
         selectedOption={props.selectedDifficulty}
         setSelectedOption={props.setSelectedDifficulty}
       />

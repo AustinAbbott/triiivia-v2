@@ -10,10 +10,10 @@ type NumberOfQuestionsProps = {
 
 const NumberOfQuestions: FC<NumberOfQuestionsProps> = (props) => {
   return (
-    <div className="dropdown" data-testId="NumberOfQuestions">
+    <div className="dropdown">
       <Dropdown
-        label="Number of Questions"
         options={["5", "10", "15", "20", "30"]}
+        placeholder="Number of Questions"
         selectedOption={props.selectedNumberOfQuestions}
         setSelectedOption={props.setSelectedNumberOfQuestions}
       />
