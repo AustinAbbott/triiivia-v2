@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { Categories } from "./components/CategoryList";
 import { Difficulty } from "./components/Difficulty";
 import { Mode } from "./components/Mode";
-import { NumberOfQuestions } from "./components/NumberOfQuestions";
+import NumberOfQuestions from "./components/NumberOfQuestions";
 import {
   API_BASE_URL,
   Category,
@@ -10,6 +10,8 @@ import {
   QuestionResponse,
 } from "../../constants";
 import TriviaApi from "../../TriviaApi";
+
+import "./style.css";
 
 type SetupProps = {
   setQuestions: (arg: QuestionResponse[]) => void;
@@ -57,16 +59,20 @@ export const Setup: FC<SetupProps> = (props) => {
   };
 
   return (
-    <div>
-      <Categories setSelectedCategory={setSelectedCategory} />
+    <div className="setup-container">
+      <Categories
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
       <NumberOfQuestions
+        selectedNumberOfQuestions={selectedNumberOfQuestions}
         setSelectedNumberOfQuestions={setSelectedNumberOfQuestions}
       />
       <Difficulty
         selectedDifficulty={selectedDifficulty}
         setSelectedDifficulty={setSelectedDifficulty}
       />
-      <Mode setSelectedMode={setSelectedMode} />
+      <Mode selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
 
       <button disabled={!readyToGo()} onClick={handleStartClick}>
         Start

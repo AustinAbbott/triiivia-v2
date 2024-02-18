@@ -8,8 +8,9 @@
 }
 
 .drop-down-button {
-  background-color: white;
-  border: blue 1px solid;
+  background-color: #023047;
+  border: #8ecae6 1px solid;
+  color: white;
   height: 50px;
   width: 100%;
 }
@@ -19,4 +20,5 @@
   flex-direction: column;
   position: absolute;
   width: 100%;
+  z-index: 1;
 }

@@ -1,10 +1,12 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Category } from "../../../../constants";
 import TriviaApi from "../../../../TriviaApi";
 
 import "../style.css";
+import { Dropdown } from "../../../../components/Dropdown";
 
 type CategoriesProps = {
+  selectedCategory?: Category;
   setSelectedCategory: (arg: Category) => void;
 };
 
@@ -20,6 +22,16 @@ export const Categories: FC<CategoriesProps> = (props) => {
       .catch((e: any) => setError(e));
   }, []);
 
+  const handleSelection = (value: string) => {
+    const selectedCategory = categories?.find(
+      (category) => category.name === value
+    );
+
+    if (!selectedCategory) return;
+
+    props.setSelectedCategory(selectedCategory);
+  };
+
   const categoryNameSort = (a: Category, b: Category) => {
     if (a.name.toLowerCase() > b.name.toLowerCase()) {
       return 1;
@@ -30,33 +42,18 @@ export const Categories: FC<CategoriesProps> = (props) => {
     }
   };
 
-  const sortedCategories = categories?.sort(categoryNameSort);
-
-  const handleSelection = (e: ChangeEvent<HTMLSelectElement>) => {
-    const selectedCategory = categories?.find(
-      (category) => category.name === e.currentTarget.value
-    );
-
-    if (!selectedCategory) return;
-
-    props.setSelectedCategory(selectedCategory);
-  };
+  const sortedCategoryNames = categories
+    ?.sort(categoryNameSort)
+    .map((categoryObject) => categoryObject.name);
 
   return (
     <div className="dropdown">
-      <label htmlFor="category">Choose category: </label>
-      <select
-        disabled={!sortedCategories}
-        id="category"
-        onChange={handleSelection}
-      >
-        <option disabled selected>
-          -- select --
-        </option>
-        {sortedCategories?.map((category) => (
-          <option key={category.id}>{category.name}</option>
-        ))}
-      </select>
+      <Dropdown
+        options={sortedCategoryNames}
+        label="Category"
+        selectedOption={props.selectedCategory?.name}
+        setSelectedOption={handleSelection}
+      />
       {error && <div>Something went wrong while fetching categories</div>}
     </div>
   );
