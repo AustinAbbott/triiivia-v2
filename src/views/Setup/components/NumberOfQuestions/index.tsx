@@ -1,6 +1,6 @@
 // TODO: make list dynamic based on how many questions are available for a given category
 import { FC } from "react";
-import "../style.css";
+import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
 
 type NumberOfQuestionsProps = {

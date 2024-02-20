@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { Category } from "../../../../constants";
 import TriviaApi from "../../../../TriviaApi";
 
-import "../style.css";
+import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
 
 type CategoriesProps = {

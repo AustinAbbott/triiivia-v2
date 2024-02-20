@@ -1,5 +1,5 @@
 // import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import { Setup } from "./views/Setup";
 import { useState } from "react";
 import { Game } from "./views/Game";
@@ -14,10 +14,10 @@ function App() {
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <h1>triiivia</h1>
       </header>
-      <body>
+      <div>
         {!questions && <Setup setQuestions={setQuestions} />}
         {questions && <Game questions={questions} />}
-      </body>
+      </div>
     </div>
   );
 }

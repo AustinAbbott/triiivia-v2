@@ -11,7 +11,7 @@ import {
 } from "../../constants";
 import TriviaApi from "../../TriviaApi";
 
-import "./style.css";
+import "./style.scss";
 import StartButton from "../../components/StartButton";
 
 type SetupProps = {

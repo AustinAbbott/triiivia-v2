@@ -1,5 +1,5 @@
 import { FC } from "react";
-import "../style.css";
+import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
 import { DifficultyOptions } from "../../../../constants";
 

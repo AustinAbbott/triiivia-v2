@@ -1,5 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
-import "./style.css";
+import "./style.scss";
+
+import polygon from "../../polygon.svg";
 
 type DropdownProps = {
   placeholder: string;
@@ -33,10 +35,19 @@ export const Dropdown: FC<DropdownProps> = (props) => {
         className="drop-down-open-button"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {props.selectedOption || props.placeholder}
+        <div className="drop-down-inner-button">
+          <div>{props.selectedOption || props.placeholder}</div>
+          <div>
+            <img
+              alt="drop down arrow icon"
+              src={polygon}
+              className={isOpen ? "drop-down-icon-open" : ""}
+            />
+          </div>
+        </div>
       </button>
-      <div className="dropdown-list-container">
-        <div className="dropdown-list">
+      <div className="drop-down-list-container">
+        <div className="drop-down-list">
           {isOpen &&
             props.options?.map((option: string) => (
               <button

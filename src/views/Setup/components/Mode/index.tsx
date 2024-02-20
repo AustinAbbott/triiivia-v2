@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Modes } from "../../../../constants";
-import "../style.css";
+import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
 
 type ModeProps = {

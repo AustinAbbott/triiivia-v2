@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import "./style.css";
+import "./style.scss";
 
 type StartButtonProps = {
   loading: boolean;
