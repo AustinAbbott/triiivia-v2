@@ -1,6 +1,7 @@
 import { FC } from "react";
 import "../style.css";
 import { Dropdown } from "../../../../components/Dropdown";
+import { DifficultyOptions } from "../../../../constants";
 
 type DifficultyProps = {
   selectedDifficulty: string;
@@ -11,7 +12,11 @@ const Difficulty: FC<DifficultyProps> = (props) => {
   return (
     <div className="dropdown">
       <Dropdown
-        options={["Easy", "Medium", "Hard"]}
+        options={[
+          DifficultyOptions.EASY,
+          DifficultyOptions.MEDIUM,
+          DifficultyOptions.HARD,
+        ]}
         placeholder="Difficulty"
         selectedOption={props.selectedDifficulty}
         setSelectedOption={props.setSelectedDifficulty}

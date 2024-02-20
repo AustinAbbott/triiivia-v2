@@ -19,13 +19,14 @@ type SetupProps = {
 };
 
 export const Setup: FC<SetupProps> = (props) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<Category>();
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("");
   const [selectedMode, setSelectedMode] = useState<string>("");
   const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =
     useState<string>("");
 
-  const readyToGo = () => {
+  const readyToGo = (): boolean => {
     return (
       !!selectedCategory &&
       !!selectedDifficulty &&
@@ -34,7 +35,7 @@ export const Setup: FC<SetupProps> = (props) => {
     );
   };
 
-  const getSelectedModeParam = () => {
+  const getSelectedModeParam = (): string => {
     switch (selectedMode) {
       case Modes.MULTIPLE_CHOICE:
         return "multiple";
@@ -45,14 +46,14 @@ export const Setup: FC<SetupProps> = (props) => {
     }
   };
 
-  const handleStartClick = async () => {
-    if (!readyToGo) return;
-
+  const handleStartClick = async (): Promise<void> => {
     const requestUrl = `${API_BASE_URL}api.php?amount=${selectedNumberOfQuestions}&category=${
       selectedCategory?.id
     }&difficulty=${selectedDifficulty.toLowerCase()}&type=${getSelectedModeParam()}&encode=base64`;
 
+    setLoading(true);
     const apiResponse = await TriviaApi.getQuestions(requestUrl);
+    setLoading(false);
 
     props.setQuestions(apiResponse);
   };
@@ -74,9 +75,11 @@ export const Setup: FC<SetupProps> = (props) => {
       <Mode selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
 
       <StartButton
+        loading={loading}
         readyToGo={readyToGo()}
         handleStartClick={handleStartClick}
       />
+      {loading && <div>Loading...</div>}
     </div>
   );
 };

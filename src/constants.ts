@@ -10,6 +10,12 @@ export enum Modes {
   MULTIPLE_CHOICE = "Multiple Choice",
 }
 
+export enum DifficultyOptions {
+  EASY = "Easy",
+  MEDIUM = "Medium",
+  HARD = "Hard",
+}
+
 enum DifficultyResponse {
   EASY = "easy",
   MEDIUM = "medium",

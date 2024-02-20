@@ -13,9 +13,11 @@ function App() {
       <header className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <h1>triiivia</h1>
-        <Setup setQuestions={setQuestions} />
-        <Game questions={questions} />
       </header>
+      <body>
+        {!questions && <Setup setQuestions={setQuestions} />}
+        {questions && <Game questions={questions} />}
+      </body>
     </div>
   );
 }
