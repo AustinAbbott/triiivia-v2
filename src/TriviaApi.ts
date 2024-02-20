@@ -1,4 +1,5 @@
-import { API_BASE_URL } from "./constants";
+import { API_BASE_URL, QuestionResponse } from "./constants";
+import Utils from "./utils";
 
 export default class TriviaApi {
   public static getCategories = async () => {
@@ -10,6 +11,9 @@ export default class TriviaApi {
   public static getQuestions = async (requestUrl: string) => {
     const result: Response = await fetch(requestUrl);
     const questionResponseObject = await result.json();
-    return questionResponseObject.results;
+    return questionResponseObject.results.map(
+      (questionObject: QuestionResponse) =>
+        Utils.decodeQuestionResponse(questionObject)
+    );
   };
 }

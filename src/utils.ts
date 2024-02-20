@@ -1,21 +1,14 @@
+import { QuestionResponse } from "./constants";
+
 export default class Utils {
-  public static decodeBase64ObjectKeys = (
-    object: { [key: string]: any } | Array<string>
-  ) => {
-    if (object instanceof Array) {
-      return object.map((value) => atob(value));
-    }
-
-    if (object instanceof Object) {
-      for (let key in object) {
-        if (object[key] instanceof Array) {
-          object[key] = this.decodeBase64ObjectKeys(object[key]);
-        }
-
-        object[key] = atob(object[key]);
-      }
-    }
-
-    return object;
+  public static decodeQuestionResponse = (questionObject: QuestionResponse) => {
+    return {
+      type: atob(questionObject.type),
+      difficulty: atob(questionObject.difficulty),
+      category: atob(questionObject.category),
+      question: atob(questionObject.question),
+      correct_answer: atob(questionObject.correct_answer),
+      incorrect_answers: questionObject.incorrect_answers.map(atob),
+    };
   };
 }
