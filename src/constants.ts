@@ -5,6 +5,11 @@ export type Category = {
   id: number;
 };
 
+export enum BooleanAnswers {
+  TRUE = "True",
+  FALSE = "False",
+}
+
 export enum Modes {
   TRUE_FALSE = "True / False",
   MULTIPLE_CHOICE = "Multiple Choice",
@@ -22,7 +27,7 @@ enum DifficultyResponse {
   HARD = "hard",
 }
 
-enum TypeResponse {
+export enum TypeResponse {
   TRUE_FALSE = "boolean",
   MULTIPLE_CHOICE = "multiple",
 }
