@@ -11,7 +11,7 @@ export default class TriviaApi {
   public static getQuestions = async (requestUrl: string) => {
     const result: Response = await fetch(requestUrl);
     const questionResponseObject = await result.json();
-    return questionResponseObject.results.map(
+    return questionResponseObject.results?.map(
       (questionObject: QuestionResponse) =>
         Utils.decodeQuestionResponse(questionObject)
     );

@@ -12,8 +12,11 @@ function App() {
       <header className="App-header">
         <h1>triiivia</h1>
       </header>
-      {!questions && <Setup setQuestions={setQuestions} />}
-      {questions && <Game questions={questions} />}
+      {!questions?.length && <Setup setQuestions={setQuestions} />}
+      {!!questions?.length && <Game questions={questions} />}
+      {!!questions && !questions.length && (
+        <div>Sorry, we don't have any questions for those selections 😔</div>
+      )}
     </div>
   );
 }
