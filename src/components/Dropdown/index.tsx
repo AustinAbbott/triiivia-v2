@@ -30,7 +30,7 @@ export const Dropdown: FC<DropdownProps> = (props) => {
   };
 
   return (
-    <div className="drop-down-container" ref={listRef}>
+    <div className="drop-down" ref={listRef}>
       <button
         className="drop-down-open-button"
         onClick={() => setIsOpen(!isOpen)}

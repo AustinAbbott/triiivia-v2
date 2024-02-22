@@ -1,8 +1,6 @@
 .drop-down {
-  &-container {
-    position: relative;
-    width: 100%;
-  }
+  position: relative;
+  width: 100%;
 
   &-button,
   &-open-button {
@@ -24,7 +22,11 @@
 
   &-inner-button {
     display: grid;
-    grid-template-columns: 392px auto;
+    grid-template-columns: auto auto;
+
+    :last-child {
+      text-align: right;
+    }
   }
 
   &-list-container {

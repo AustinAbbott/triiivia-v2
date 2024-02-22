@@ -47,7 +47,7 @@ const Categories: FC<CategoriesProps> = (props) => {
     .map((categoryObject) => categoryObject.name);
 
   return (
-    <div className="dropdown">
+    <div className="drop-down-container">
       <Dropdown
         options={sortedCategoryNames}
         placeholder="Category"

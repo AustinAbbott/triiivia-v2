@@ -10,7 +10,7 @@ type NumberOfQuestionsProps = {
 
 const NumberOfQuestions: FC<NumberOfQuestionsProps> = (props) => {
   return (
-    <div className="dropdown">
+    <div className="drop-down-container">
       <Dropdown
         options={["5", "10", "15", "20", "30"]}
         placeholder="Number of Questions"

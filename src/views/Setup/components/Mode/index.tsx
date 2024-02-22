@@ -10,7 +10,7 @@ type ModeProps = {
 
 const Mode: FC<ModeProps> = (props) => {
   return (
-    <div className="dropdown">
+    <div className="drop-down-container">
       <Dropdown
         options={[Modes.MULTIPLE_CHOICE, Modes.TRUE_FALSE]}
         placeholder="Mode"

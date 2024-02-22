@@ -10,7 +10,7 @@ type DifficultyProps = {
 
 const Difficulty: FC<DifficultyProps> = (props) => {
   return (
-    <div className="dropdown">
+    <div className="drop-down-container">
       <Dropdown
         options={[
           DifficultyOptions.EASY,
