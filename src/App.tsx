@@ -1,4 +1,3 @@
-// import logo from "./logo.svg";
 import "./App.scss";
 import { Setup } from "./views/Setup";
 import { useState } from "react";
@@ -11,13 +10,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <h1>triiivia</h1>
       </header>
-      <div>
-        {!questions && <Setup setQuestions={setQuestions} />}
-        {questions && <Game questions={questions} />}
-      </div>
+      {!questions && <Setup setQuestions={setQuestions} />}
+      {questions && <Game questions={questions} />}
     </div>
   );
 }

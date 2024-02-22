@@ -16,15 +16,18 @@ export const QuestionCard: FC<QuestionCardProps> = (props) => {
   const [enableNextButton, setEnableNextButton] = useState<boolean>(false);
 
   if (props.questionData.type === TypeResponse.TRUE_FALSE) {
-    const correctAnswer = props.questionData.correct_answer;
-
     const checkAnswer = (answer: BooleanAnswers) => {
-      if (answer === correctAnswer) {
+      if (answer === props.questionData.correct_answer) {
         console.log("Yahoo!!");
         setEnableNextButton(true);
       } else {
         console.log("aww, bummer");
       }
+    };
+
+    const handleNextClick = () => {
+      props.incrementIndex();
+      setEnableNextButton(false);
     };
 
     return (
@@ -52,7 +55,7 @@ export const QuestionCard: FC<QuestionCardProps> = (props) => {
 
         <button
           disabled={!enableNextButton}
-          onClick={() => props.incrementIndex()}
+          onClick={handleNextClick}
           type="button"
         >
           Next Question
