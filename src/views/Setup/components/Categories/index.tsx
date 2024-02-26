@@ -1,13 +1,15 @@
 import { FC, useEffect, useState } from "react";
-import { Category } from "../../../../constants";
+import { AvailableQuestionsResponse, Category } from "../../../../constants";
 import TriviaApi from "../../../../TriviaApi";
 
 import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
+import Utils from "../../../../utils";
 
 type CategoriesProps = {
   selectedCategory?: Category;
-  setSelectedCategory: (arg: Category) => void;
+  setAvailableQuestions: (arg?: any) => void;
+  setSelectedCategory: (arg?: Category) => void;
 };
 
 const Categories: FC<CategoriesProps> = (props) => {
@@ -22,28 +24,26 @@ const Categories: FC<CategoriesProps> = (props) => {
       .catch((e: any) => setError(e));
   }, []);
 
+  useEffect(() => {
+    if (!props.selectedCategory) return;
+
+    TriviaApi.getQuestionCountForCategory(props.selectedCategory.id)
+      .then((res: AvailableQuestionsResponse) =>
+        props.setAvailableQuestions(res)
+      )
+      .catch((e: any) => setError(e));
+  }, [props.selectedCategory]);
+
   const handleSelection = (value: string) => {
     const selectedCategory = categories?.find(
       (category) => category.name === value
     );
 
-    if (!selectedCategory) return;
-
     props.setSelectedCategory(selectedCategory);
   };
 
-  const categoryNameSort = (a: Category, b: Category) => {
-    if (a.name.toLowerCase() > b.name.toLowerCase()) {
-      return 1;
-    } else if (a.name.toLowerCase() < b.name.toLowerCase()) {
-      return -1;
-    } else {
-      return 0;
-    }
-  };
-
   const sortedCategoryNames = categories
-    ?.sort(categoryNameSort)
+    ?.sort(Utils.categoryNameSort)
     .map((categoryObject) => categoryObject.name);
 
   return (

@@ -8,6 +8,13 @@ export default class TriviaApi {
     return categoryObject.trivia_categories;
   };
 
+  public static getQuestionCountForCategory = async (categoryId: number) => {
+    const result = await fetch(
+      `${API_BASE_URL}api_count.php?category=${categoryId}`
+    ).then((response) => response.json());
+    return result;
+  };
+
   public static getQuestions = async (requestUrl: string) => {
     const result: Response = await fetch(requestUrl);
     const questionResponseObject = await result.json();

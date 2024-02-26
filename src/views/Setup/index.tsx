@@ -19,8 +19,11 @@ type SetupProps = {
 };
 
 export const Setup: FC<SetupProps> = (props) => {
+  const [availableQuestions, setAvailableQuestions] = useState<any>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
-  const [selectedCategory, setSelectedCategory] = useState<Category>();
+  const [selectedCategory, setSelectedCategory] = useState<
+    undefined | Category
+  >(undefined);
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("");
   const [selectedMode, setSelectedMode] = useState<string>("");
   const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =
@@ -62,15 +65,16 @@ export const Setup: FC<SetupProps> = (props) => {
     <div className="setup-container">
       <Categories
         selectedCategory={selectedCategory}
+        setAvailableQuestions={setAvailableQuestions}
         setSelectedCategory={setSelectedCategory}
-      />
-      <NumberOfQuestions
-        selectedNumberOfQuestions={selectedNumberOfQuestions}
-        setSelectedNumberOfQuestions={setSelectedNumberOfQuestions}
       />
       <Difficulty
         selectedDifficulty={selectedDifficulty}
         setSelectedDifficulty={setSelectedDifficulty}
+      />
+      <NumberOfQuestions
+        selectedNumberOfQuestions={selectedNumberOfQuestions}
+        setSelectedNumberOfQuestions={setSelectedNumberOfQuestions}
       />
       <Mode selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
 
