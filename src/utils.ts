@@ -1,4 +1,10 @@
-import { Category, QuestionResponse } from "./constants";
+import {
+  AvailableQuestionsResponse,
+  Category,
+  DifficultyOptions,
+  Modes,
+  QuestionResponse,
+} from "./constants";
 
 export default class Utils {
   public static decodeQuestionResponse = (questionObject: QuestionResponse) => {
@@ -12,7 +18,7 @@ export default class Utils {
     };
   };
 
-  public static categoryNameSort = (a: Category, b: Category) => {
+  public static categoryNameSort = (a: Category, b: Category): number => {
     if (a.name.toLowerCase() > b.name.toLowerCase()) {
       return 1;
     } else if (a.name.toLowerCase() < b.name.toLowerCase()) {
@@ -20,5 +26,84 @@ export default class Utils {
     } else {
       return 0;
     }
+  };
+
+  public static getSelectedModeParam = (selectedMode: string): string => {
+    switch (selectedMode) {
+      case Modes.MULTIPLE_CHOICE:
+        return "multiple";
+      case Modes.TRUE_FALSE:
+        return "boolean";
+      default:
+        return "";
+    }
+  };
+
+  public static generateNumberOfQuestions = (
+    availableQuestions?: AvailableQuestionsResponse,
+    selectedDifficulty?: string
+  ): string[] => {
+    let questionsCountForDifficulty: number = 0;
+
+    switch (selectedDifficulty) {
+      case DifficultyOptions.EASY:
+        const easyQuestionCount =
+          availableQuestions?.category_question_count.total_easy_question_count;
+
+        if (easyQuestionCount) questionsCountForDifficulty = easyQuestionCount;
+        break;
+      case DifficultyOptions.MEDIUM:
+        const mediumQuestionCount =
+          availableQuestions?.category_question_count
+            .total_medium_question_count;
+
+        if (mediumQuestionCount)
+          questionsCountForDifficulty = mediumQuestionCount;
+        break;
+      case DifficultyOptions.HARD:
+        const hardQuestionCount =
+          availableQuestions?.category_question_count.total_hard_question_count;
+
+        if (hardQuestionCount) questionsCountForDifficulty = hardQuestionCount;
+        break;
+      default:
+        break;
+    }
+
+    const questionCountList: string[] = [];
+
+    for (let i = 5; i <= questionsCountForDifficulty && i <= 30; i += 5) {
+      questionCountList.push(`${i}`);
+    }
+
+    return questionCountList;
+  };
+
+  public static generateDifficultyLevels = (
+    availableQuestions?: AvailableQuestionsResponse
+  ): DifficultyOptions[] => {
+    const options: DifficultyOptions[] = [];
+
+    if (!availableQuestions) return options;
+
+    if (
+      availableQuestions.category_question_count.total_easy_question_count > 5
+    ) {
+      options.push(DifficultyOptions.EASY);
+    }
+
+    if (
+      availableQuestions.category_question_count.total_medium_question_count > 5
+    ) {
+      options.push(DifficultyOptions.MEDIUM);
+    }
+
+    if (
+      availableQuestions.category_question_count.total_hard_question_count > 5
+    ) {
+      options.push(DifficultyOptions.EASY);
+    }
+
+    return options;
   };
 }

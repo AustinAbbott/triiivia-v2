@@ -4,22 +4,24 @@ import Difficulty from "./components/Difficulty";
 import Mode from "./components/Mode";
 import NumberOfQuestions from "./components/NumberOfQuestions";
 import {
-  API_BASE_URL,
+  AvailableQuestionsResponse,
   Category,
-  Modes,
   QuestionResponse,
 } from "../../constants";
 import TriviaApi from "../../TriviaApi";
 
 import "./style.scss";
 import StartButton from "../../components/StartButton";
+import Utils from "../../utils";
 
 type SetupProps = {
   setQuestions: (arg: QuestionResponse[]) => void;
 };
 
 export const Setup: FC<SetupProps> = (props) => {
-  const [availableQuestions, setAvailableQuestions] = useState<any>(undefined);
+  const [availableQuestions, setAvailableQuestions] = useState<
+    undefined | AvailableQuestionsResponse
+  >(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<
     undefined | Category
@@ -38,21 +40,12 @@ export const Setup: FC<SetupProps> = (props) => {
     );
   };
 
-  const getSelectedModeParam = (): string => {
-    switch (selectedMode) {
-      case Modes.MULTIPLE_CHOICE:
-        return "multiple";
-      case Modes.TRUE_FALSE:
-        return "boolean";
-      default:
-        return "";
-    }
-  };
-
   const handleStartClick = async (): Promise<void> => {
-    const requestUrl = `${API_BASE_URL}api.php?amount=${selectedNumberOfQuestions}&category=${
+    const requestUrl = `api.php?amount=${selectedNumberOfQuestions}&category=${
       selectedCategory?.id
-    }&difficulty=${selectedDifficulty.toLowerCase()}&type=${getSelectedModeParam()}&encode=base64`;
+    }&difficulty=${selectedDifficulty.toLowerCase()}&type=${Utils.getSelectedModeParam(
+      selectedMode
+    )}&encode=base64`;
 
     setLoading(true);
     const apiResponse = await TriviaApi.getQuestions(requestUrl);
@@ -69,10 +62,13 @@ export const Setup: FC<SetupProps> = (props) => {
         setSelectedCategory={setSelectedCategory}
       />
       <Difficulty
+        availableQuestions={availableQuestions}
         selectedDifficulty={selectedDifficulty}
         setSelectedDifficulty={setSelectedDifficulty}
       />
       <NumberOfQuestions
+        availableQuestions={availableQuestions}
+        selectedDifficulty={selectedDifficulty}
         selectedNumberOfQuestions={selectedNumberOfQuestions}
         setSelectedNumberOfQuestions={setSelectedNumberOfQuestions}
       />

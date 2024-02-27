@@ -2,8 +2,12 @@
 import { FC } from "react";
 import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
+import { AvailableQuestionsResponse } from "../../../../constants";
+import Utils from "../../../../utils";
 
 type NumberOfQuestionsProps = {
+  availableQuestions?: AvailableQuestionsResponse;
+  selectedDifficulty?: string;
   selectedNumberOfQuestions?: string;
   setSelectedNumberOfQuestions: (arg: string) => void;
 };
@@ -12,7 +16,10 @@ const NumberOfQuestions: FC<NumberOfQuestionsProps> = (props) => {
   return (
     <div className="drop-down-container">
       <Dropdown
-        options={["5", "10", "15", "20", "30"]}
+        options={Utils.generateNumberOfQuestions(
+          props.availableQuestions,
+          props.selectedDifficulty
+        )}
         placeholder="Number of Questions"
         selectedOption={props.selectedNumberOfQuestions}
         setSelectedOption={props.setSelectedNumberOfQuestions}

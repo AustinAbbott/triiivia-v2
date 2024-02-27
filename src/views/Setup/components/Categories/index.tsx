@@ -8,7 +8,7 @@ import Utils from "../../../../utils";
 
 type CategoriesProps = {
   selectedCategory?: Category;
-  setAvailableQuestions: (arg?: any) => void;
+  setAvailableQuestions: (arg?: AvailableQuestionsResponse) => void;
   setSelectedCategory: (arg?: Category) => void;
 };
 
