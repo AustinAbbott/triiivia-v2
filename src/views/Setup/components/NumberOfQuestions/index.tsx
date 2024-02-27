@@ -3,7 +3,7 @@ import { FC } from "react";
 import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
 import { AvailableQuestionsResponse } from "../../../../constants";
-import Utils from "../../../../utils";
+import Utils from "../../../../utils/utils";
 
 type NumberOfQuestionsProps = {
   availableQuestions?: AvailableQuestionsResponse;
@@ -23,6 +23,7 @@ const NumberOfQuestions: FC<NumberOfQuestionsProps> = (props) => {
         placeholder="Number of Questions"
         selectedOption={props.selectedNumberOfQuestions}
         setSelectedOption={props.setSelectedNumberOfQuestions}
+        testId="NumberOfQuestions"
       />
     </div>
   );

@@ -1,5 +1,5 @@
 import { API_BASE_URL, QuestionResponse } from "./constants";
-import Utils from "./utils";
+import Utils from "./utils/utils";
 
 export default class TriviaApi {
   public static getCategories = async () => {

@@ -4,7 +4,7 @@ import TriviaApi from "../../../../TriviaApi";
 
 import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
-import Utils from "../../../../utils";
+import Utils from "../../../../utils/utils";
 
 type CategoriesProps = {
   selectedCategory?: Category;

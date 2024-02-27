@@ -4,7 +4,7 @@ import {
   DifficultyOptions,
   Modes,
   QuestionResponse,
-} from "./constants";
+} from "../constants";
 
 export default class Utils {
   public static decodeQuestionResponse = (questionObject: QuestionResponse) => {
