@@ -18,6 +18,7 @@ const Difficulty: FC<DifficultyProps> = (props) => {
         placeholder="Difficulty"
         selectedOption={props.selectedDifficulty}
         setSelectedOption={props.setSelectedDifficulty}
+        testId="Difficulty"
       />
     </div>
   );

@@ -3,13 +3,12 @@ import NumberOfQuestions from ".";
 
 describe("NumberOfQuestions", () => {
   const mockProps = {
-    selectedNumberOfQuestions: undefined,
+    selectedNumberOfQuestions: "10",
     setSelectedNumberOfQuestions: jest.fn(),
   };
 
   test("mounts", async () => {
     render(<NumberOfQuestions {...mockProps} />);
-
     expect(screen.getByTestId("NumberOfQuestions")).toBeTruthy();
   });
 });

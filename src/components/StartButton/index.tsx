@@ -12,6 +12,7 @@ const StartButton: FC<StartButtonProps> = (props) => {
   return (
     <button
       className="start-button"
+      data-testid="StartButton"
       disabled={!props.readyToGo ?? props.loading}
       onClick={props.handleStartClick}
     >

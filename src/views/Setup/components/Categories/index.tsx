@@ -53,6 +53,7 @@ const Categories: FC<CategoriesProps> = (props) => {
         placeholder="Category"
         selectedOption={props.selectedCategory?.name}
         setSelectedOption={handleSelection}
+        testId="Categories"
       />
       {error && <div>Something went wrong while fetching categories</div>}
     </div>
