@@ -62,6 +62,7 @@ export const Setup: FC<SetupProps> = (props) => {
         setSelectedCategory={setSelectedCategory}
       />
       <Difficulty
+        availableQuestions={availableQuestions}
         selectedDifficulty={selectedDifficulty}
         setSelectedDifficulty={setSelectedDifficulty}
       />

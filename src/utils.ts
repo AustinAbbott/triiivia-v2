@@ -78,4 +78,32 @@ export default class Utils {
 
     return questionCountList;
   };
+
+  public static generateDifficultyLevels = (
+    availableQuestions?: AvailableQuestionsResponse
+  ): DifficultyOptions[] => {
+    const options: DifficultyOptions[] = [];
+
+    if (!availableQuestions) return options;
+
+    if (
+      availableQuestions.category_question_count.total_easy_question_count > 5
+    ) {
+      options.push(DifficultyOptions.EASY);
+    }
+
+    if (
+      availableQuestions.category_question_count.total_medium_question_count > 5
+    ) {
+      options.push(DifficultyOptions.MEDIUM);
+    }
+
+    if (
+      availableQuestions.category_question_count.total_hard_question_count > 5
+    ) {
+      options.push(DifficultyOptions.EASY);
+    }
+
+    return options;
+  };
 }
