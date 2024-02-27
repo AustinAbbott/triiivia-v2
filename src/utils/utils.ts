@@ -101,7 +101,7 @@ export default class Utils {
     if (
       availableQuestions.category_question_count.total_hard_question_count > 5
     ) {
-      options.push(DifficultyOptions.EASY);
+      options.push(DifficultyOptions.HARD);
     }
 
     return options;
