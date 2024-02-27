@@ -16,6 +16,7 @@ const Mode: FC<ModeProps> = (props) => {
         placeholder="Mode"
         selectedOption={props.selectedMode}
         setSelectedOption={props.setSelectedMode}
+        testId="Mode"
       />
     </div>
   );

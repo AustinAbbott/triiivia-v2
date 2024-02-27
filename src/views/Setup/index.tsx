@@ -12,7 +12,7 @@ import TriviaApi from "../../TriviaApi";
 
 import "./style.scss";
 import StartButton from "../../components/StartButton";
-import Utils from "../../utils";
+import Utils from "../../utils/utils";
 
 type SetupProps = {
   setQuestions: (arg: QuestionResponse[]) => void;

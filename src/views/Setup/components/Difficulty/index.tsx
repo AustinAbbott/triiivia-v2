@@ -2,7 +2,7 @@ import { FC } from "react";
 import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
 import { AvailableQuestionsResponse } from "../../../../constants";
-import Utils from "../../../../utils";
+import Utils from "../../../../utils/utils";
 
 type DifficultyProps = {
   availableQuestions?: AvailableQuestionsResponse;
@@ -18,6 +18,7 @@ const Difficulty: FC<DifficultyProps> = (props) => {
         placeholder="Difficulty"
         selectedOption={props.selectedDifficulty}
         setSelectedOption={props.setSelectedDifficulty}
+        testId="Difficulty"
       />
     </div>
   );

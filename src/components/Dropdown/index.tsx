@@ -7,6 +7,7 @@ type DropdownProps = {
   placeholder: string;
   options?: any[];
   selectedOption?: string;
+  testId?: string;
   setSelectedOption: (arg: any) => void;
 };
 
@@ -30,7 +31,11 @@ export const Dropdown: FC<DropdownProps> = (props) => {
   };
 
   return (
-    <div className="drop-down" ref={listRef}>
+    <div
+      className="drop-down"
+      data-testid={props.testId ?? "Dropdown"}
+      ref={listRef}
+    >
       <button
         className="drop-down-open-button"
         onClick={() => setIsOpen(!isOpen)}

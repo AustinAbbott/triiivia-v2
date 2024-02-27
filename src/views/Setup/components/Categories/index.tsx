@@ -4,7 +4,7 @@ import TriviaApi from "../../../../TriviaApi";
 
 import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
-import Utils from "../../../../utils";
+import Utils from "../../../../utils/utils";
 
 type CategoriesProps = {
   selectedCategory?: Category;
@@ -53,6 +53,7 @@ const Categories: FC<CategoriesProps> = (props) => {
         placeholder="Category"
         selectedOption={props.selectedCategory?.name}
         setSelectedOption={handleSelection}
+        testId="Categories"
       />
       {error && <div>Something went wrong while fetching categories</div>}
     </div>
