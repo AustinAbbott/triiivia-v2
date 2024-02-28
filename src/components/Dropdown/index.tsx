@@ -4,6 +4,7 @@ import "./style.scss";
 import polygon from "../../polygon.svg";
 
 type DropdownProps = {
+  disabled?: boolean;
   placeholder: string;
   options?: any[];
   selectedOption?: string;
@@ -39,6 +40,7 @@ export const Dropdown: FC<DropdownProps> = (props) => {
       <button
         className="drop-down-open-button"
         onClick={() => setIsOpen(!isOpen)}
+        disabled={props.disabled}
       >
         <div className="drop-down-inner-button">
           <div>{props.selectedOption || props.placeholder}</div>
