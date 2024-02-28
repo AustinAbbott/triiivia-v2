@@ -35,6 +35,10 @@
     }
   }
 
+  &-inner-text-unselected {
+    opacity: 0.5;
+  }
+
   &-list-container {
     max-height: 400px;
     position: absolute;

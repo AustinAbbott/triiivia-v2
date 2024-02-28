@@ -43,7 +43,13 @@ export const Dropdown: FC<DropdownProps> = (props) => {
         disabled={props.disabled}
       >
         <div className="drop-down-inner-button">
-          <div>{props.selectedOption || props.placeholder}</div>
+          <div
+            className={
+              props.selectedOption ? "" : "drop-down-inner-text-unselected"
+            }
+          >
+            {props.selectedOption || props.placeholder}
+          </div>
           <div>
             <img
               alt="drop down arrow icon"
