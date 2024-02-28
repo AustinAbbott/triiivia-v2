@@ -62,17 +62,23 @@ export const Setup: FC<SetupProps> = (props) => {
         setSelectedCategory={setSelectedCategory}
       />
       <Difficulty
+        disabled={!selectedCategory}
         availableQuestions={availableQuestions}
         selectedDifficulty={selectedDifficulty}
         setSelectedDifficulty={setSelectedDifficulty}
       />
       <NumberOfQuestions
         availableQuestions={availableQuestions}
+        disabled={!selectedDifficulty}
         selectedDifficulty={selectedDifficulty}
         selectedNumberOfQuestions={selectedNumberOfQuestions}
         setSelectedNumberOfQuestions={setSelectedNumberOfQuestions}
       />
-      <Mode selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
+      <Mode
+        disabled={!selectedNumberOfQuestions}
+        selectedMode={selectedMode}
+        setSelectedMode={setSelectedMode}
+      />
 
       <StartButton
         loading={loading}

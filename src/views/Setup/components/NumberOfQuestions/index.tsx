@@ -6,6 +6,7 @@ import Utils from "../../../../utils/utils";
 
 type NumberOfQuestionsProps = {
   availableQuestions?: AvailableQuestionsResponse;
+  disabled: boolean;
   selectedDifficulty?: string;
   selectedNumberOfQuestions?: string;
   setSelectedNumberOfQuestions: (arg: string) => void;
@@ -15,6 +16,7 @@ const NumberOfQuestions: FC<NumberOfQuestionsProps> = (props) => {
   return (
     <div className="drop-down-container">
       <Dropdown
+        disabled={props.disabled}
         options={Utils.generateNumberOfQuestions(
           props.availableQuestions,
           props.selectedDifficulty

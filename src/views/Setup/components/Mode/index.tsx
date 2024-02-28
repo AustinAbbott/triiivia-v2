@@ -4,6 +4,7 @@ import "../style.scss";
 import { Dropdown } from "../../../../components/Dropdown";
 
 type ModeProps = {
+  disabled: boolean;
   selectedMode?: string;
   setSelectedMode: (arg: string) => void;
 };
@@ -12,6 +13,7 @@ const Mode: FC<ModeProps> = (props) => {
   return (
     <div className="drop-down-container">
       <Dropdown
+        disabled={props.disabled}
         options={[Modes.MULTIPLE_CHOICE, Modes.TRUE_FALSE]}
         placeholder="Mode"
         selectedOption={props.selectedMode}

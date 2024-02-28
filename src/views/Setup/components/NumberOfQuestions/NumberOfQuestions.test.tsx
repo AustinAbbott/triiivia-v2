@@ -3,6 +3,7 @@ import NumberOfQuestions from ".";
 
 describe("NumberOfQuestions", () => {
   const mockProps = {
+    disabled: false,
     selectedNumberOfQuestions: "10",
     setSelectedNumberOfQuestions: jest.fn(),
   };

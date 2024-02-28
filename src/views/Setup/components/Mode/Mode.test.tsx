@@ -4,6 +4,7 @@ import { Modes } from "../../../../constants";
 
 describe("Mode", () => {
   const mockProps = {
+    disabled: false,
     selectedMode: Modes.MULTIPLE_CHOICE,
     setSelectedMode: jest.fn(),
   };

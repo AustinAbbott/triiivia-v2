@@ -16,6 +16,12 @@
     width: 100%;
   }
 
+  &-button:disabled,
+  &-open-button:disabled {
+    background-color: rgba(239, 239, 239, 0.3);
+    cursor: unset;
+  }
+
   &-open-button {
     border-radius: 6px;
   }
@@ -27,6 +33,10 @@
     :last-child {
       text-align: right;
     }
+  }
+
+  &-inner-text-unselected {
+    opacity: 0.5;
   }
 
   &-list-container {

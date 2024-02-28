@@ -6,6 +6,7 @@ import { MOCK_AVAILABLE_QUESTION_RESPONSE } from "../../../../test-data";
 describe("Difficulty", () => {
   const mockProps = {
     availableQuestions: MOCK_AVAILABLE_QUESTION_RESPONSE,
+    disabled: false,
     selectedDifficulty: DifficultyOptions.EASY,
     setSelectedDifficulty: jest.fn(),
   };
