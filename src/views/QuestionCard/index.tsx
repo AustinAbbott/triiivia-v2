@@ -17,26 +17,53 @@ type TrueOrFalseCardProps = {
   incrementIndex: () => void;
 };
 
+type SelectedAnswers = {
+  falseSelected: boolean;
+  trueSelected: boolean;
+};
+
 export const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
   const [correctAnswerSelected, setCorrectAnswerSelected] =
     useState<boolean>(false);
+  const [selectedAnswers, setSelectedAnswers] = useState<SelectedAnswers>({
+    falseSelected: false,
+    trueSelected: false,
+  });
   const correctAnswer = props.questionData.correct_answer;
 
   if (props.questionData.type !== TypeResponse.TRUE_FALSE) return null;
 
   const checkAnswer = (answer: BooleanAnswers) => {
     if (answer === correctAnswer) {
-      console.log("Yahoo!!");
       setCorrectAnswerSelected(true);
-    } else {
-      console.log("aww, bummer");
+    }
+
+    switch (answer) {
+      case BooleanAnswers.FALSE:
+        setSelectedAnswers({ ...selectedAnswers, falseSelected: true });
+        break;
+      case BooleanAnswers.TRUE:
+        setSelectedAnswers({ ...selectedAnswers, trueSelected: true });
+        break;
+      default:
+        break;
     }
   };
 
   const handleNextClick = () => {
     props.incrementIndex();
+    // TODO: figure out why we have to do this
     setCorrectAnswerSelected(false);
+    setSelectedAnswers({ trueSelected: false, falseSelected: false });
   };
+
+  const falseDisabled =
+    selectedAnswers.falseSelected ||
+    (correctAnswerSelected && correctAnswer !== BooleanAnswers.FALSE);
+
+  const trueDisabled =
+    selectedAnswers.trueSelected ||
+    (correctAnswerSelected && correctAnswer !== BooleanAnswers.TRUE);
 
   return (
     <div>
@@ -49,18 +76,14 @@ export const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
           <button
             className="choice-button"
             onClick={() => checkAnswer(BooleanAnswers.TRUE)}
-            disabled={
-              correctAnswerSelected && correctAnswer !== BooleanAnswers.TRUE
-            }
+            disabled={trueDisabled}
           >
             True
           </button>
           <button
             className="choice-button"
             onClick={() => checkAnswer(BooleanAnswers.FALSE)}
-            disabled={
-              correctAnswerSelected && correctAnswer !== BooleanAnswers.FALSE
-            }
+            disabled={falseDisabled}
           >
             False
           </button>
