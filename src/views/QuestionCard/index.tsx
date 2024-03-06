@@ -5,7 +5,7 @@ import "./style.scss";
 import TrueOrFalseCard from "./TrueOrFalse";
 
 type QuestionCardProps = {
-  key: number;
+  index: number;
   questionData: QuestionResponse;
   incrementIndex: () => void;
 };
@@ -15,7 +15,7 @@ export const QuestionCard: FC<QuestionCardProps> = (props) => {
     case TypeResponse.TRUE_FALSE:
       return (
         <TrueOrFalseCard
-          key={props.key}
+          index={props.index}
           questionData={props.questionData}
           incrementIndex={props.incrementIndex}
         />

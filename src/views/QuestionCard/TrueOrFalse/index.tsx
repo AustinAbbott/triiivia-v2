@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { BooleanAnswers, QuestionResponse } from "../../../constants";
 
 type TrueOrFalseCardProps = {
-  key: number;
+  index: number;
   questionData: QuestionResponse;
   incrementIndex: () => void;
 };
@@ -58,7 +58,7 @@ const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
     (correctAnswerSelected && correctAnswer !== BooleanAnswers.TRUE);
 
   return (
-    <div key={`${props.key}`}>
+    <div key={`${props.index}`}>
       <div>
         <div className="question-container">
           <div>True or False?</div>

@@ -17,7 +17,7 @@ export const Game: FC<GameProps> = (props) => {
 
   const questionCards: ReactElement[] = props.questions?.map((questionData) => (
     <QuestionCard
-      key={index}
+      index={index}
       questionData={questionData}
       incrementIndex={incrementIndex}
     />
