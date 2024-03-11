@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, ReactElement, useState } from "react";
 import { QuestionResponse } from "../../constants";
 import { QuestionCard } from "../QuestionCard";
 
@@ -7,16 +7,23 @@ type GameProps = {
 };
 
 export const Game: FC<GameProps> = (props) => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [cardIndex, setCardIndex] = useState<number>(0);
+
   if (!props.questions) return null;
 
   const incrementIndex = () => {
-    setCurrentIndex(currentIndex + 1);
+    setCardIndex(cardIndex + 1);
   };
 
-  const questionList = props.questions?.map((questionData) => (
-    <QuestionCard incrementIndex={incrementIndex} questionData={questionData} />
-  ));
+  const questionCards: ReactElement[] = props.questions?.map(
+    (questionData: QuestionResponse, index: number) => (
+      <QuestionCard
+        index={index}
+        questionData={questionData}
+        incrementIndex={incrementIndex}
+      />
+    )
+  );
 
-  return <div>{questionList[currentIndex]}</div>;
+  return <div>{questionCards[cardIndex]}</div>;
 };
