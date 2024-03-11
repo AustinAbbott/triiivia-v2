@@ -7,21 +7,23 @@ type GameProps = {
 };
 
 export const Game: FC<GameProps> = (props) => {
-  const [index, setIndex] = useState<number>(0);
+  const [cardIndex, setCardIndex] = useState<number>(0);
 
   if (!props.questions) return null;
 
   const incrementIndex = () => {
-    setIndex(index + 1);
+    setCardIndex(cardIndex + 1);
   };
 
-  const questionCards: ReactElement[] = props.questions?.map((questionData) => (
-    <QuestionCard
-      index={index}
-      questionData={questionData}
-      incrementIndex={incrementIndex}
-    />
-  ));
+  const questionCards: ReactElement[] = props.questions?.map(
+    (questionData: QuestionResponse, index: number) => (
+      <QuestionCard
+        index={index}
+        questionData={questionData}
+        incrementIndex={incrementIndex}
+      />
+    )
+  );
 
-  return <div>{questionCards[index]}</div>;
+  return <div>{questionCards[cardIndex]}</div>;
 };

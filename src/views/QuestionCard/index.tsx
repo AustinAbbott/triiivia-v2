@@ -15,7 +15,7 @@ export const QuestionCard: FC<QuestionCardProps> = (props) => {
     case TypeResponse.TRUE_FALSE:
       return (
         <TrueOrFalseCard
-          index={props.index}
+          key={props.index}
           questionData={props.questionData}
           incrementIndex={props.incrementIndex}
         />
