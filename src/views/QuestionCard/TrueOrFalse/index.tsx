@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { BooleanAnswers, QuestionResponse } from "../../../constants";
+import "./style.scss";
 
 type TrueOrFalseCardProps = {
   questionData: QuestionResponse;
@@ -9,6 +10,52 @@ type TrueOrFalseCardProps = {
 type SelectedAnswers = {
   falseSelected: boolean;
   trueSelected: boolean;
+};
+
+const TrueButtonIcon = (props: {
+  correctAnswer: string;
+  selectedAnswers: SelectedAnswers;
+}) => {
+  switch (props.correctAnswer) {
+    case BooleanAnswers.TRUE:
+      if (props.selectedAnswers.trueSelected) {
+        return <span> ✅</span>;
+      }
+      return null;
+    case BooleanAnswers.FALSE:
+      if (
+        props.selectedAnswers.trueSelected ||
+        props.selectedAnswers.falseSelected
+      ) {
+        return <span> ❌</span>;
+      }
+      return null;
+    default:
+      return null;
+  }
+};
+
+const FalseButtonIcon = (props: {
+  correctAnswer: string;
+  selectedAnswers: SelectedAnswers;
+}) => {
+  switch (props.correctAnswer) {
+    case BooleanAnswers.FALSE:
+      if (props.selectedAnswers.falseSelected) {
+        return <span> ✅</span>;
+      }
+      return null;
+    case BooleanAnswers.TRUE:
+      if (
+        props.selectedAnswers.falseSelected ||
+        props.selectedAnswers.trueSelected
+      ) {
+        return <span> ❌</span>;
+      }
+      return null;
+    default:
+      return null;
+  }
 };
 
 const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
@@ -62,20 +109,29 @@ const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
             onClick={() => checkAnswer(BooleanAnswers.TRUE)}
             disabled={trueDisabled}
           >
-            True
+            <span>True</span>
+            <TrueButtonIcon
+              correctAnswer={correctAnswer}
+              selectedAnswers={selectedAnswers}
+            />
           </button>
           <button
             className="choice-button"
             onClick={() => checkAnswer(BooleanAnswers.FALSE)}
             disabled={falseDisabled}
           >
-            False
+            <span>False</span>
+            <FalseButtonIcon
+              correctAnswer={correctAnswer}
+              selectedAnswers={selectedAnswers}
+            />
           </button>
         </div>
       </div>
 
       <button
         disabled={!correctAnswerSelected}
+        className="next-button"
         onClick={handleNextClick}
         type="button"
       >
