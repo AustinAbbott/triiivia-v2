@@ -3,6 +3,7 @@ import { QuestionResponse, TypeResponse } from "../../constants";
 
 import "./style.scss";
 import TrueOrFalseCard from "./TrueOrFalse";
+import MultiChoiceCard from "./MultiChoice";
 
 type QuestionCardProps = {
   index: number;
@@ -15,18 +16,22 @@ export const QuestionCard: FC<QuestionCardProps> = (props) => {
     case TypeResponse.TRUE_FALSE:
       return (
         <TrueOrFalseCard
+          incrementIndex={props.incrementIndex}
+          // React key to differentiate cards
+          // See https://austinabbott.dev/blog/react-key/ for reference
           key={props.index}
           questionData={props.questionData}
-          incrementIndex={props.incrementIndex}
         />
       );
     case TypeResponse.MULTIPLE_CHOICE:
       return (
-        <div>
-          <div>
-            <h4>{props.questionData.question}</h4>
-          </div>
-        </div>
+        <MultiChoiceCard
+          incrementIndex={props.incrementIndex}
+          // React key to differentiate cards
+          // See https://austinabbott.dev/blog/react-key/ for reference
+          key={props.index}
+          questionData={props.questionData}
+        />
       );
     default:
       return null;
