@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import { BooleanAnswers, QuestionResponse } from "../../../constants";
-import "./style.scss";
 
 type TrueOrFalseCardProps = {
   questionData: QuestionResponse;
