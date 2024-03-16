@@ -28,7 +28,7 @@
   font-weight: 600;
   height: 50px;
   margin: 8px;
-  width: 200px;
+  min-width: 200px;
 
   &:disabled {
     background-color: #726b6b;

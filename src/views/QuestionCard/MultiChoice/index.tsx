@@ -1,5 +1,6 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { QuestionResponse } from "../../../constants";
+import Utils from "../../../utils/utils";
 
 type MultiChoiceCardProps = {
   questionData: QuestionResponse;
@@ -7,35 +8,14 @@ type MultiChoiceCardProps = {
 };
 
 const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
-  const [options, setOptions] = useState<undefined | string[]>([
+  const [selectedOption, setSelectedOption] = useState<undefined | string>();
+  const correctAnswer = props.questionData.correct_answer;
+
+  // TODO: fix this
+  const options = Utils.shuffle([
     ...props.questionData.incorrect_answers,
     props.questionData.correct_answer,
   ]);
-
-  useEffect(() => {
-    options && shuffle(options);
-  });
-
-  // Source: https://stackoverflow.com/a/2450976/12815672
-  const shuffle = (arr: string[]) => {
-    let currentIndex = arr.length,
-      randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex > 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [arr[currentIndex], arr[randomIndex]] = [
-        arr[randomIndex],
-        arr[currentIndex],
-      ];
-    }
-
-    setOptions(arr);
-  };
 
   return (
     <div>
@@ -48,13 +28,20 @@ const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
       <div className="choice-container">
         {options?.map((question: string, index: number) => {
           return (
-            <button className="choice-button" key={index}>
+            <button
+              className="choice-button"
+              key={index}
+              onClick={() => setSelectedOption(question)}
+            >
               {question}
             </button>
           );
         })}
 
-        <button className="next-button" disabled={true}>
+        <button
+          className="next-button"
+          disabled={selectedOption !== correctAnswer}
+        >
           Next Question
         </button>
       </div>
