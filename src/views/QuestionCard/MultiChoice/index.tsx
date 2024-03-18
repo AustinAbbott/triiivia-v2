@@ -7,9 +7,21 @@ type MultiChoiceCardProps = {
   incrementIndex: () => void;
 };
 
+type SelectedChoices = {
+  [key: string]: boolean;
+};
+
 const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
-  const [selectedOption, setSelectedOption] = useState<undefined | string>();
+  const [selectedChoices, setSelectedChoices] = useState<SelectedChoices>({});
   const correctAnswer = props.questionData.correct_answer;
+
+  const handleSelection = (selection: string) => {
+    setSelectedChoices({ ...selectedChoices, [selection]: true });
+  };
+
+  const handleNextClick = () => {
+    props.incrementIndex();
+  };
 
   return (
     <div>
@@ -20,21 +32,33 @@ const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
       </div>
 
       <div className="choice-container">
-        {props.choices?.map((question: string, index: number) => {
+        {props.choices?.map((choice: string, index: number) => {
           return (
             <button
               className="choice-button"
               key={index}
-              onClick={() => setSelectedOption(question)}
+              onClick={() => handleSelection(choice)}
+              disabled={
+                selectedChoices[choice] || selectedChoices[correctAnswer]
+              }
             >
-              {question}
+              {choice}
+
+              {selectedChoices[choice] && choice === correctAnswer && (
+                <span> ✅</span>
+              )}
+
+              {selectedChoices[choice] && choice !== correctAnswer && (
+                <span> ❌</span>
+              )}
             </button>
           );
         })}
 
         <button
           className="next-button"
-          disabled={selectedOption !== correctAnswer}
+          disabled={!selectedChoices[correctAnswer]}
+          onClick={handleNextClick}
         >
           Next Question
         </button>
