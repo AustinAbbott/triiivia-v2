@@ -15,7 +15,7 @@ export const Game: FC<GameProps> = (props) => {
     setCardIndex(cardIndex + 1);
   };
 
-  const questionCards: ReactElement[] = props.questions?.map(
+  const questionCards: ReactElement[] = props.questions.map(
     (questionData: QuestionResponse, index: number) => (
       <QuestionCard
         index={index}

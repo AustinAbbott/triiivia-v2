@@ -35,6 +35,8 @@ const Categories: FC<CategoriesProps> = (props) => {
   }, [props.selectedCategory]);
 
   const handleSelection = (value: string) => {
+    setError(undefined);
+
     const selectedCategory = categories?.find(
       (category) => category.name === value
     );
@@ -55,7 +57,11 @@ const Categories: FC<CategoriesProps> = (props) => {
         setSelectedOption={handleSelection}
         testId="Categories"
       />
-      {error && <div>Something went wrong while fetching categories</div>}
+      {error && (
+        <div className="error-message">
+          Oops, something went wrong while fetching categories
+        </div>
+      )}
     </div>
   );
 };

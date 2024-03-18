@@ -3,6 +3,8 @@ import { QuestionResponse, TypeResponse } from "../../constants";
 
 import "./style.scss";
 import TrueOrFalseCard from "./TrueOrFalse";
+import MultiChoiceCard from "./MultiChoice";
+import Utils from "../../utils/utils";
 
 type QuestionCardProps = {
   index: number;
@@ -15,6 +17,8 @@ export const QuestionCard: FC<QuestionCardProps> = (props) => {
     case TypeResponse.TRUE_FALSE:
       return (
         <TrueOrFalseCard
+          // React key to differentiate cards
+          // See https://austinabbott.dev/blog/react-key/ for reference
           key={props.index}
           questionData={props.questionData}
           incrementIndex={props.incrementIndex}
@@ -22,11 +26,17 @@ export const QuestionCard: FC<QuestionCardProps> = (props) => {
       );
     case TypeResponse.MULTIPLE_CHOICE:
       return (
-        <div>
-          <div>
-            <h4>{props.questionData.question}</h4>
-          </div>
-        </div>
+        <MultiChoiceCard
+          choices={Utils.shuffle([
+            ...props.questionData.incorrect_answers,
+            props.questionData.correct_answer,
+          ])}
+          // React key to differentiate cards
+          // See https://austinabbott.dev/blog/react-key/ for reference
+          key={props.index}
+          questionData={props.questionData}
+          incrementIndex={props.incrementIndex}
+        />
       );
     default:
       return null;
