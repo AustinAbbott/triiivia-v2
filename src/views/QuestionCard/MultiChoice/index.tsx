@@ -24,7 +24,7 @@ const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
   };
 
   return (
-    <div>
+    <div data-testid="MultiChoiceCard">
       <div>
         <div className="question-container">
           <div>{props.questionData.question}</div>
@@ -59,6 +59,7 @@ const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
           className="next-button"
           disabled={!selectedChoices[correctAnswer]}
           onClick={handleNextClick}
+          data-testid="MultiChoiceNextButton"
         >
           Next Question
         </button>
