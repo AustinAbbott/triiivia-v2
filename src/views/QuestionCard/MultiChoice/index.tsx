@@ -1,14 +1,11 @@
 import { FC, useState } from "react";
 import { QuestionResponse } from "../../../constants";
+import { SelectedChoices } from "../../../shared-types";
 
 type MultiChoiceCardProps = {
   choices: string[];
   questionData: QuestionResponse;
   incrementIndex: () => void;
-};
-
-type SelectedChoices = {
-  [key: string]: boolean;
 };
 
 const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
