@@ -1,6 +1,7 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { BooleanAnswers, QuestionResponse } from "../../../constants";
 import { SelectedChoices } from "../../../shared-types";
+import { ScoreContext } from "../../Game";
 
 type TrueOrFalseCardProps = {
   questionData: QuestionResponse;
@@ -8,10 +9,20 @@ type TrueOrFalseCardProps = {
 };
 
 const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
-  const [selectedAnswers, setSelectedAnswers] = useState<SelectedChoices>({});
+  // TODO: Add type for this context
+  // @ts-ignore
+  const { state, update } = useContext(ScoreContext);
   const correctAnswer = props.questionData.correct_answer;
+  const [selectedAnswers, setSelectedAnswers] = useState<SelectedChoices>({});
 
   const checkAnswer = (answer: BooleanAnswers) => {
+    const correctAnswerOnFirstTry =
+      !Object.keys(selectedAnswers).length && answer === correctAnswer;
+
+    if (correctAnswerOnFirstTry) {
+      update({ score: state?.score + 1 });
+    }
+
     setSelectedAnswers({ ...selectedAnswers, [answer]: true });
   };
 
@@ -38,7 +49,7 @@ const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
             <span>True</span>
 
             {selectedAnswers[BooleanAnswers.TRUE] &&
-              BooleanAnswers.TRUE === correctAnswer && <span> ✅</span>}
+              BooleanAnswers.TRUE === correctAnswer && <span> 🎉</span>}
 
             {selectedAnswers[BooleanAnswers.TRUE] &&
               BooleanAnswers.TRUE !== correctAnswer && <span> ❌</span>}
@@ -54,7 +65,7 @@ const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
             <span>False</span>
 
             {selectedAnswers[BooleanAnswers.FALSE] &&
-              BooleanAnswers.FALSE === correctAnswer && <span> ✅</span>}
+              BooleanAnswers.FALSE === correctAnswer && <span> 🎉</span>}
 
             {selectedAnswers[BooleanAnswers.FALSE] &&
               BooleanAnswers.FALSE !== correctAnswer && <span> ❌</span>}

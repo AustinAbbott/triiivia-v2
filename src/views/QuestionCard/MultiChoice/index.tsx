@@ -42,7 +42,7 @@ const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
               {choice}
 
               {selectedChoices[choice] && choice === correctAnswer && (
-                <span> ✅</span>
+                <span> 🎉</span>
               )}
 
               {selectedChoices[choice] && choice !== correctAnswer && (
