@@ -1,7 +1,7 @@
-import { FC, useContext, useState } from "react";
+import { FC, useState } from "react";
 import { BooleanAnswers, QuestionResponse } from "../../../constants";
 import { SelectedChoices } from "../../../shared-types";
-import { ScoreContext } from "../../Game";
+import { AccessScoreContext } from "../../Game";
 
 type TrueOrFalseCardProps = {
   questionData: QuestionResponse;
@@ -9,11 +9,9 @@ type TrueOrFalseCardProps = {
 };
 
 const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
-  // TODO: Add type for this context
-  // @ts-ignore
-  const { state, update } = useContext(ScoreContext);
-  const correctAnswer = props.questionData.correct_answer;
   const [selectedAnswers, setSelectedAnswers] = useState<SelectedChoices>({});
+  const { state, update } = AccessScoreContext();
+  const correctAnswer = props.questionData.correct_answer;
 
   const checkAnswer = (answer: BooleanAnswers) => {
     const correctAnswerOnFirstTry =
