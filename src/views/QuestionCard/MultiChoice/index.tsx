@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import { QuestionResponse } from "../../../constants";
 import { SelectedChoices } from "../../../shared-types";
+import { AccessScoreContext } from "../../Game";
 
 type MultiChoiceCardProps = {
   choices: string[];
@@ -10,9 +11,17 @@ type MultiChoiceCardProps = {
 
 const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
   const [selectedChoices, setSelectedChoices] = useState<SelectedChoices>({});
+  const { state, update } = AccessScoreContext();
   const correctAnswer = props.questionData.correct_answer;
 
   const handleSelection = (selection: string) => {
+    const correctAnswerOnFirstTry =
+      !Object.keys(selectedChoices).length && selection === correctAnswer;
+
+    if (correctAnswerOnFirstTry) {
+      update({ score: state?.score + 1 });
+    }
+
     setSelectedChoices({ ...selectedChoices, [selection]: true });
   };
 
