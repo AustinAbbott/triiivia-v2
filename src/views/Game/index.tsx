@@ -64,7 +64,7 @@ export const Game: FC<GameProps> = (props) => {
         />
       </ScoreContext.Provider>
     )),
-    <FinishScreen score={state.score} />,
+    <FinishScreen score={state.score} total={props.questions.length} />,
   ];
 
   return <div>{questionCards[cardIndex]}</div>;
