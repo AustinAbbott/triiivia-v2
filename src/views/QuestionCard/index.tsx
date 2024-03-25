@@ -13,7 +13,7 @@ type QuestionCardProps = {
 };
 
 export const QuestionCard: FC<QuestionCardProps> = (props) => {
-  const choices = useMemo(() => {
+  const shuffledChoices = useMemo(() => {
     return Utils.shuffle([
       ...props.questionData.incorrect_answers,
       props.questionData.correct_answer,
@@ -34,7 +34,7 @@ export const QuestionCard: FC<QuestionCardProps> = (props) => {
     case TypeResponse.MULTIPLE_CHOICE:
       return (
         <MultiChoiceCard
-          choices={choices}
+          choices={shuffledChoices}
           // React key to differentiate cards
           // See https://austinabbott.dev/blog/react-key/ for reference
           key={props.index}

@@ -9,6 +9,7 @@ import {
 } from "react";
 import { QuestionResponse } from "../../constants";
 import { QuestionCard } from "../QuestionCard";
+import { FinishScreen } from "../FinishScreen";
 
 type GameProps = {
   questions?: QuestionResponse[];
@@ -63,8 +64,7 @@ export const Game: FC<GameProps> = (props) => {
         />
       </ScoreContext.Provider>
     )),
-    // TODO: Add finish screen here
-    <div>{state.score}</div>,
+    <FinishScreen score={state.score} />,
   ];
 
   return <div>{questionCards[cardIndex]}</div>;
