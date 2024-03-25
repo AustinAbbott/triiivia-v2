@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { QuestionResponse, TypeResponse } from "../../constants";
 
 import "./style.scss";
@@ -13,6 +13,13 @@ type QuestionCardProps = {
 };
 
 export const QuestionCard: FC<QuestionCardProps> = (props) => {
+  const choices = useMemo(() => {
+    return Utils.shuffle([
+      ...props.questionData.incorrect_answers,
+      props.questionData.correct_answer,
+    ]);
+  }, [props.questionData]);
+
   switch (props.questionData.type) {
     case TypeResponse.TRUE_FALSE:
       return (
@@ -27,10 +34,7 @@ export const QuestionCard: FC<QuestionCardProps> = (props) => {
     case TypeResponse.MULTIPLE_CHOICE:
       return (
         <MultiChoiceCard
-          choices={Utils.shuffle([
-            ...props.questionData.incorrect_answers,
-            props.questionData.correct_answer,
-          ])}
+          choices={choices}
           // React key to differentiate cards
           // See https://austinabbott.dev/blog/react-key/ for reference
           key={props.index}
