@@ -2,9 +2,9 @@ import { FC, useMemo } from "react";
 import { QuestionResponse, TypeResponse } from "../../constants";
 
 import "./style.scss";
-import TrueOrFalseCard from "./TrueOrFalse";
-import MultiChoiceCard from "./MultiChoice";
+import TrueOrFalseCard from "../TrueOrFalseCard";
 import Utils from "../../utils/utils";
+import MultipleChoiceCard from "../MultipleChoiceCard";
 
 type QuestionCardProps = {
   index: number;
@@ -33,7 +33,7 @@ export const QuestionCard: FC<QuestionCardProps> = (props) => {
       );
     case TypeResponse.MULTIPLE_CHOICE:
       return (
-        <MultiChoiceCard
+        <MultipleChoiceCard
           choices={shuffledChoices}
           // React key to differentiate cards
           // See https://austinabbott.dev/blog/react-key/ for reference

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { QuestionResponse } from "../../../constants";
+import { QuestionResponse } from "../../constants";
 import TrueOrFalseCard from ".";
 
 describe("TrueOrFalse", () => {
