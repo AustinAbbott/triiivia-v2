@@ -77,7 +77,7 @@ export const Game: FC<GameProps> = (props) => {
         className="reset-game"
         onClick={() => props.setQuestions(undefined)}
       >
-        Reset Game
+        {cardIndex === questionCards.length - 1 ? "Home" : "Reset Game"}
       </button>
     </div>
   );
