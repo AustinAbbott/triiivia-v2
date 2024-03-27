@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "triiivia",
+  "name": "triiivia — a minimalist web app to play trivia",
   "icons": [
     {
       "src": "favicon.ico",

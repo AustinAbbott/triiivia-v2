@@ -1,15 +1,15 @@
 import { FC, useState } from "react";
-import { QuestionResponse } from "../../../constants";
-import { SelectedChoices } from "../../../shared-types";
-import { AccessScoreContext } from "../../Game";
+import { QuestionResponse } from "../../constants";
+import { SelectedChoices } from "../../shared-types";
+import { AccessScoreContext } from "../../views/Game";
 
-type MultiChoiceCardProps = {
+type MultipleChoiceCardProps = {
   choices: string[];
   questionData: QuestionResponse;
   incrementIndex: () => void;
 };
 
-const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
+const MultipleChoiceCard: FC<MultipleChoiceCardProps> = (props) => {
   const [selectedChoices, setSelectedChoices] = useState<SelectedChoices>({});
   const { state, update } = AccessScoreContext();
   const correctAnswer = props.questionData.correct_answer;
@@ -30,7 +30,7 @@ const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
   };
 
   return (
-    <div data-testid="MultiChoiceCard">
+    <div data-testid="MultipleChoiceCard">
       <div>
         <div className="question-container">
           <div>{props.questionData.question}</div>
@@ -65,7 +65,7 @@ const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
           className="next-button"
           disabled={!selectedChoices[correctAnswer]}
           onClick={handleNextClick}
-          data-testid="MultiChoiceNextButton"
+          data-testid="MultipleChoiceNextButton"
         >
           Next Question
         </button>
@@ -74,4 +74,4 @@ const MultiChoiceCard: FC<MultiChoiceCardProps> = (props) => {
   );
 };
 
-export default MultiChoiceCard;
+export default MultipleChoiceCard;

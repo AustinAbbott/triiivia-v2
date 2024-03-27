@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
-import { BooleanAnswers, QuestionResponse } from "../../../constants";
-import { SelectedChoices } from "../../../shared-types";
-import { AccessScoreContext } from "../../Game";
+import { BooleanAnswers, QuestionResponse } from "../../constants";
+import { SelectedChoices } from "../../shared-types";
+import { AccessScoreContext } from "../../views/Game";
 
 type TrueOrFalseCardProps = {
   questionData: QuestionResponse;
