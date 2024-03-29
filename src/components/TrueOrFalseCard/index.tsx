@@ -9,23 +9,35 @@ type TrueOrFalseCardProps = {
 };
 
 const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
-  const [selectedAnswers, setSelectedAnswers] = useState<SelectedChoices>({});
+  const [selectedChoices, setSelectedChoices] = useState<SelectedChoices>({});
   const { state, update } = AccessScoreContext();
   const correctAnswer = props.questionData.correct_answer;
 
   const checkAnswer = (answer: BooleanAnswers) => {
     const correctAnswerOnFirstTry =
-      !Object.keys(selectedAnswers).length && answer === correctAnswer;
+      !Object.keys(selectedChoices).length && answer === correctAnswer;
 
     if (correctAnswerOnFirstTry) {
       update({ score: state?.score + 1 });
     }
 
-    setSelectedAnswers({ ...selectedAnswers, [answer]: true });
+    setSelectedChoices({ ...selectedChoices, [answer]: true });
   };
 
   const handleNextClick = () => {
     props.incrementIndex();
+  };
+
+  const getChoiceButtonClass = (choice: BooleanAnswers) => {
+    if (!selectedChoices[choice]) return "choice-button";
+
+    if (choice === correctAnswer) {
+      return "choice-button--correct";
+    } else if (choice !== correctAnswer) {
+      return "choice-button--incorrect";
+    } else {
+      return "choice-button";
+    }
   };
 
   return (
@@ -37,42 +49,30 @@ const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
         </div>
         <div className="choice-container">
           <button
-            className="choice-button"
+            className={getChoiceButtonClass(BooleanAnswers.TRUE)}
             onClick={() => checkAnswer(BooleanAnswers.TRUE)}
             disabled={
-              selectedAnswers[BooleanAnswers.TRUE] ||
-              selectedAnswers[correctAnswer]
+              selectedChoices[BooleanAnswers.TRUE] ||
+              selectedChoices[correctAnswer]
             }
           >
-            <span>True</span>
-
-            {selectedAnswers[BooleanAnswers.TRUE] &&
-              BooleanAnswers.TRUE === correctAnswer && <span> 🎉</span>}
-
-            {selectedAnswers[BooleanAnswers.TRUE] &&
-              BooleanAnswers.TRUE !== correctAnswer && <span> ❌</span>}
+            True
           </button>
           <button
-            className="choice-button"
+            className={getChoiceButtonClass(BooleanAnswers.FALSE)}
             onClick={() => checkAnswer(BooleanAnswers.FALSE)}
             disabled={
-              selectedAnswers[BooleanAnswers.FALSE] ||
-              selectedAnswers[correctAnswer]
+              selectedChoices[BooleanAnswers.FALSE] ||
+              selectedChoices[correctAnswer]
             }
           >
-            <span>False</span>
-
-            {selectedAnswers[BooleanAnswers.FALSE] &&
-              BooleanAnswers.FALSE === correctAnswer && <span> 🎉</span>}
-
-            {selectedAnswers[BooleanAnswers.FALSE] &&
-              BooleanAnswers.FALSE !== correctAnswer && <span> ❌</span>}
+            False
           </button>
         </div>
       </div>
 
       <button
-        disabled={!selectedAnswers[correctAnswer]}
+        disabled={!selectedChoices[correctAnswer]}
         className="next-button"
         onClick={handleNextClick}
         type="button"

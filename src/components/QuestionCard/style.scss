@@ -21,14 +21,18 @@
   align-items: center;
 }
 
-.choice-button,
-.next-button {
+%choice-button-shared {
   border-radius: 6px;
   font-size: 24px;
   font-weight: 600;
   height: 50px;
   margin: 8px;
   min-width: 200px;
+}
+
+.choice-button,
+.next-button {
+  @extend %choice-button-shared;
 
   &:disabled {
     background-color: #726b6b;
@@ -45,7 +49,18 @@
 
   &:enabled:hover {
     background-color: #f1e3e3;
-    border: none;
+    // TODO: figure out if this is needed
+    // border: none;
     color: #726b6b;
   }
+}
+
+.choice-button--correct {
+  @extend %choice-button-shared;
+  border: #62d3ab solid 3px;
+}
+
+.choice-button--incorrect {
+  @extend %choice-button-shared;
+  border: #934f4f solid 3px;
 }

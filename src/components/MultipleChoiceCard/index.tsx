@@ -29,6 +29,18 @@ const MultipleChoiceCard: FC<MultipleChoiceCardProps> = (props) => {
     props.incrementIndex();
   };
 
+  const getChoiceButtonClass = (choice: string) => {
+    if (!selectedChoices[choice]) return "choice-button";
+
+    if (choice === correctAnswer) {
+      return "choice-button--correct";
+    } else if (choice !== correctAnswer) {
+      return "choice-button--incorrect";
+    } else {
+      return "choice-button";
+    }
+  };
+
   return (
     <div data-testid="MultipleChoiceCard">
       <div>
@@ -41,7 +53,7 @@ const MultipleChoiceCard: FC<MultipleChoiceCardProps> = (props) => {
         {props.choices?.map((choice: string, index: number) => {
           return (
             <button
-              className="choice-button"
+              className={getChoiceButtonClass(choice)}
               key={index}
               onClick={() => handleSelection(choice)}
               disabled={
@@ -49,14 +61,6 @@ const MultipleChoiceCard: FC<MultipleChoiceCardProps> = (props) => {
               }
             >
               {choice}
-
-              {selectedChoices[choice] && choice === correctAnswer && (
-                <span> 🎉</span>
-              )}
-
-              {selectedChoices[choice] && choice !== correctAnswer && (
-                <span> ❌</span>
-              )}
             </button>
           );
         })}
