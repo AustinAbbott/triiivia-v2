@@ -28,6 +28,32 @@ const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
     props.incrementIndex();
   };
 
+  const getTrueButtonClass = () => {
+    if (!selectedAnswers[BooleanAnswers.TRUE]) return "choice-button";
+
+    switch (correctAnswer) {
+      case BooleanAnswers.TRUE:
+        return "choice-button--correct";
+      case BooleanAnswers.FALSE:
+        return "choice-button--incorrect";
+      default:
+        return "choice-button";
+    }
+  };
+
+  const getFalseButtonClass = () => {
+    if (!selectedAnswers[BooleanAnswers.FALSE]) return "choice-button";
+
+    switch (correctAnswer) {
+      case BooleanAnswers.FALSE:
+        return "choice-button--correct";
+      case BooleanAnswers.TRUE:
+        return "choice-button--incorrect";
+      default:
+        return "choice-button";
+    }
+  };
+
   return (
     <div data-testid="TrueOrFalseCard">
       <div>
@@ -37,36 +63,24 @@ const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
         </div>
         <div className="choice-container">
           <button
-            className="choice-button"
+            className={getTrueButtonClass()}
             onClick={() => checkAnswer(BooleanAnswers.TRUE)}
             disabled={
               selectedAnswers[BooleanAnswers.TRUE] ||
               selectedAnswers[correctAnswer]
             }
           >
-            <span>True</span>
-
-            {selectedAnswers[BooleanAnswers.TRUE] &&
-              BooleanAnswers.TRUE === correctAnswer && <span> 🎉</span>}
-
-            {selectedAnswers[BooleanAnswers.TRUE] &&
-              BooleanAnswers.TRUE !== correctAnswer && <span> ❌</span>}
+            True
           </button>
           <button
-            className="choice-button"
+            className={getFalseButtonClass()}
             onClick={() => checkAnswer(BooleanAnswers.FALSE)}
             disabled={
               selectedAnswers[BooleanAnswers.FALSE] ||
               selectedAnswers[correctAnswer]
             }
           >
-            <span>False</span>
-
-            {selectedAnswers[BooleanAnswers.FALSE] &&
-              BooleanAnswers.FALSE === correctAnswer && <span> 🎉</span>}
-
-            {selectedAnswers[BooleanAnswers.FALSE] &&
-              BooleanAnswers.FALSE !== correctAnswer && <span> ❌</span>}
+            False
           </button>
         </div>
       </div>
