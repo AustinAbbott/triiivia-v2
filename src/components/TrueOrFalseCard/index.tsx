@@ -9,48 +9,34 @@ type TrueOrFalseCardProps = {
 };
 
 const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
-  const [selectedAnswers, setSelectedAnswers] = useState<SelectedChoices>({});
+  const [selectedChoices, setSelectedChoices] = useState<SelectedChoices>({});
   const { state, update } = AccessScoreContext();
   const correctAnswer = props.questionData.correct_answer;
 
   const checkAnswer = (answer: BooleanAnswers) => {
     const correctAnswerOnFirstTry =
-      !Object.keys(selectedAnswers).length && answer === correctAnswer;
+      !Object.keys(selectedChoices).length && answer === correctAnswer;
 
     if (correctAnswerOnFirstTry) {
       update({ score: state?.score + 1 });
     }
 
-    setSelectedAnswers({ ...selectedAnswers, [answer]: true });
+    setSelectedChoices({ ...selectedChoices, [answer]: true });
   };
 
   const handleNextClick = () => {
     props.incrementIndex();
   };
 
-  const getTrueButtonClass = () => {
-    if (!selectedAnswers[BooleanAnswers.TRUE]) return "choice-button";
+  const getChoiceButtonClass = (choice: BooleanAnswers) => {
+    if (!selectedChoices[choice]) return "choice-button";
 
-    switch (correctAnswer) {
-      case BooleanAnswers.TRUE:
-        return "choice-button--correct";
-      case BooleanAnswers.FALSE:
-        return "choice-button--incorrect";
-      default:
-        return "choice-button";
-    }
-  };
-
-  const getFalseButtonClass = () => {
-    if (!selectedAnswers[BooleanAnswers.FALSE]) return "choice-button";
-
-    switch (correctAnswer) {
-      case BooleanAnswers.FALSE:
-        return "choice-button--correct";
-      case BooleanAnswers.TRUE:
-        return "choice-button--incorrect";
-      default:
-        return "choice-button";
+    if (choice === correctAnswer) {
+      return "choice-button--correct";
+    } else if (choice !== correctAnswer) {
+      return "choice-button--incorrect";
+    } else {
+      return "choice-button";
     }
   };
 
@@ -63,21 +49,21 @@ const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
         </div>
         <div className="choice-container">
           <button
-            className={getTrueButtonClass()}
+            className={getChoiceButtonClass(BooleanAnswers.TRUE)}
             onClick={() => checkAnswer(BooleanAnswers.TRUE)}
             disabled={
-              selectedAnswers[BooleanAnswers.TRUE] ||
-              selectedAnswers[correctAnswer]
+              selectedChoices[BooleanAnswers.TRUE] ||
+              selectedChoices[correctAnswer]
             }
           >
             True
           </button>
           <button
-            className={getFalseButtonClass()}
+            className={getChoiceButtonClass(BooleanAnswers.FALSE)}
             onClick={() => checkAnswer(BooleanAnswers.FALSE)}
             disabled={
-              selectedAnswers[BooleanAnswers.FALSE] ||
-              selectedAnswers[correctAnswer]
+              selectedChoices[BooleanAnswers.FALSE] ||
+              selectedChoices[correctAnswer]
             }
           >
             False
@@ -86,7 +72,7 @@ const TrueOrFalseCard: FC<TrueOrFalseCardProps> = (props) => {
       </div>
 
       <button
-        disabled={!selectedAnswers[correctAnswer]}
+        disabled={!selectedChoices[correctAnswer]}
         className="next-button"
         onClick={handleNextClick}
         type="button"
