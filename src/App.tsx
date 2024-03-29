@@ -13,7 +13,9 @@ function App() {
         <h1>triiivia</h1>
       </header>
       {!questions?.length && <Setup setQuestions={setQuestions} />}
-      {!!questions?.length && <Game questions={questions} />}
+      {!!questions?.length && (
+        <Game questions={questions} setQuestions={setQuestions} />
+      )}
       {!!questions && !questions.length && (
         <div>Sorry, we don't have any questions for those selections 😔</div>
       )}

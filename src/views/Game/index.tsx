@@ -11,8 +11,11 @@ import { QuestionResponse } from "../../constants";
 import { QuestionCard } from "../../components/QuestionCard";
 import { FinishScreen } from "../FinishScreen";
 
+import "./style.scss";
+
 type GameProps = {
   questions?: QuestionResponse[];
+  setQuestions: (arg: QuestionResponse[] | undefined) => void;
 };
 
 type ScoreObject = {
@@ -67,5 +70,15 @@ export const Game: FC<GameProps> = (props) => {
     <FinishScreen score={state.score} total={props.questions.length} />,
   ];
 
-  return <div data-testid="Game">{questionCards[cardIndex]}</div>;
+  return (
+    <div data-testid="Game">
+      {questionCards[cardIndex]}
+      <button
+        className="reset-game"
+        onClick={() => props.setQuestions(undefined)}
+      >
+        {cardIndex === questionCards.length - 1 ? "Home" : "Reset Game"}
+      </button>
+    </div>
+  );
 };
