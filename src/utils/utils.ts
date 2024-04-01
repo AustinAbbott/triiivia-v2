@@ -6,15 +6,17 @@ import {
   QuestionResponse,
 } from "../constants";
 
+import { Base64 } from "js-base64";
+
 export default class Utils {
   public static decodeQuestionResponse = (questionObject: QuestionResponse) => {
     return {
-      type: atob(questionObject.type),
-      difficulty: atob(questionObject.difficulty),
-      category: atob(questionObject.category),
-      question: atob(questionObject.question),
-      correct_answer: atob(questionObject.correct_answer),
-      incorrect_answers: questionObject.incorrect_answers.map(atob),
+      type: Base64.decode(questionObject.type),
+      difficulty: Base64.decode(questionObject.difficulty),
+      category: Base64.decode(questionObject.category),
+      question: Base64.decode(questionObject.question),
+      correct_answer: Base64.decode(questionObject.correct_answer),
+      incorrect_answers: questionObject.incorrect_answers.map(Base64.decode),
     };
   };
 
