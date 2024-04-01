@@ -17,3 +17,11 @@
   font-size: 30px;
   justify-content: center;
 }
+
+.divider {
+  background-color: #f1e3e3;
+  height: 2px;
+  max-width: 700px;
+  transition: width 1s ease;
+  width: 85vw;
+}

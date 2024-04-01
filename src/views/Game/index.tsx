@@ -71,7 +71,7 @@ export const Game: FC<GameProps> = (props) => {
   ];
 
   return (
-    <div data-testid="Game">
+    <div data-testid="Game" className="game">
       {questionCards[cardIndex]}
       <button
         className="reset-game"
