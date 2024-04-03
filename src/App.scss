@@ -26,15 +26,26 @@
   background-color: #f1e3e3;
   height: 2px;
   max-width: 700px;
-  width: 85vw;
+  width: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: line-grow 1.5s ease-in-out forwards;
 
   &#top {
-    position: absolute;
     top: 20px;
   }
 
   &#bottom {
-    position: absolute;
     bottom: 20px;
+  }
+}
+
+@keyframes line-grow {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 85vw;
   }
 }
