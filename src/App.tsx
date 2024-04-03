@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="divider"> </div>
+      <div className="divider" id="top"></div>
       <header className="App-header">
         <h1>triiivia</h1>
       </header>
@@ -20,7 +20,7 @@ function App() {
       {!!questions && !questions.length && (
         <div>Sorry, we don't have any questions for those selections 😔</div>
       )}
-      <div className="divider"> </div>
+      <div className="divider" id="bottom"></div>
     </div>
   );
 }

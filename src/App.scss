@@ -1,3 +1,7 @@
+#root {
+  height: 100vh;
+}
+
 .App {
   align-items: center;
   display: flex;
@@ -22,6 +26,15 @@
   background-color: #f1e3e3;
   height: 2px;
   max-width: 700px;
-  transition: width 1s ease;
   width: 85vw;
+
+  &#top {
+    position: absolute;
+    top: 20px;
+  }
+
+  &#bottom {
+    position: absolute;
+    bottom: 20px;
+  }
 }
