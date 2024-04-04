@@ -32,7 +32,7 @@ const Categories: FC<CategoriesProps> = (props) => {
         props.setAvailableQuestions(res)
       )
       .catch((e: any) => setError(e));
-  }, [props.selectedCategory]);
+  }, [props]);
 
   const handleSelection = (value: string) => {
     setError(undefined);
