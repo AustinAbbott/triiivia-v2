@@ -4,8 +4,10 @@ import { Category } from "../../../../constants";
 
 describe("Categories", () => {
   const mockProps = {
+    loading: false,
     selectedCategory: {} as Category,
     setAvailableQuestions: jest.fn(),
+    setLoading: jest.fn(),
     setSelectedCategory: jest.fn(),
   };
 

@@ -50,15 +50,16 @@ export const Setup: FC<SetupProps> = (props) => {
     setLoading(true);
     const apiResponse = await TriviaApi.getQuestions(requestUrl);
     setLoading(false);
-
     props.setQuestions(apiResponse);
   };
 
   return (
     <div className="setup-container">
       <Categories
+        loading={loading}
         selectedCategory={selectedCategory}
         setAvailableQuestions={setAvailableQuestions}
+        setLoading={setLoading}
         setSelectedCategory={setSelectedCategory}
       />
       <Difficulty
@@ -85,6 +86,8 @@ export const Setup: FC<SetupProps> = (props) => {
         readyToGo={readyToGo()}
         handleStartClick={handleStartClick}
       />
+
+      {/* TODO: Make prettier loading behavior */}
       {loading && <div>Loading...</div>}
     </div>
   );
