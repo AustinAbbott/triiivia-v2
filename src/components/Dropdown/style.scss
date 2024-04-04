@@ -10,7 +10,7 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
-    height: 56px;
+    height: auto;
     padding: 20px;
     text-align: left;
     width: 100%;
@@ -53,16 +53,23 @@
     overflow: auto;
   }
 
-  &-icon-open {
-    transform: rotate(180deg);
-    transition-duration: 0.25s;
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg);
-    -webkit-transition-duration: 0.25s;
-    -moz-transition-duration: 0.25s;
-    -o-transition-duration: 0.25s;
-    transition-duration: 0.25s;
+  &-icon {
+    &-container {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+    &-open {
+      transform: rotate(180deg);
+      transition-duration: 0.25s;
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      transform: rotate(180deg);
+      -webkit-transition-duration: 0.25s;
+      -moz-transition-duration: 0.25s;
+      -o-transition-duration: 0.25s;
+      transition-duration: 0.25s;
+    }
   }
 }

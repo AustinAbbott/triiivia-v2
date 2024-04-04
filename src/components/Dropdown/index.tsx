@@ -50,7 +50,7 @@ export const Dropdown: FC<DropdownProps> = (props) => {
           >
             {props.selectedOption || props.placeholder}
           </div>
-          <div>
+          <div className="drop-down-icon-container">
             <img
               alt="drop down arrow icon"
               src={polygon}
