@@ -7,9 +7,11 @@ import { Dropdown } from "../../../../components/Dropdown";
 import Utils from "../../../../utils/utils";
 
 type CategoriesProps = {
+  loading: boolean;
   selectedCategory?: Category;
   setAvailableQuestions: (arg?: AvailableQuestionsResponse) => void;
   setSelectedCategory: (arg?: Category) => void;
+  setLoading: (arg: boolean) => void;
 };
 
 const Categories: FC<CategoriesProps> = (props) => {
@@ -19,29 +21,42 @@ const Categories: FC<CategoriesProps> = (props) => {
   const [error, setError] = useState<undefined | string>(undefined);
 
   useEffect(() => {
-    TriviaApi.getCategories()
-      .then((categories: Category[]) => setCategories(categories))
-      .catch((e: any) => setError(e));
+    loadCategories();
+    /* 
+      I don't like disabling eslint like this,
+      but an empty dependency array still seems to be considered the standard way to call a function on mount of a component,
+      so I'm sticking with it for now
+    */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (!props.selectedCategory) return;
+  const loadCategories = () => {
+    props.setLoading(true);
 
-    TriviaApi.getQuestionCountForCategory(props.selectedCategory.id)
-      .then((res: AvailableQuestionsResponse) =>
-        props.setAvailableQuestions(res)
-      )
-      .catch((e: any) => setError(e));
-  }, [props]);
+    TriviaApi.getCategories()
+      .then((categories: Category[]) => setCategories(categories))
+      .catch((e: any) => setError(e))
+      .finally(() => props.setLoading(false));
+  };
 
-  const handleSelection = (value: string) => {
+  const handleSelection = async (value: string) => {
     setError(undefined);
 
     const selectedCategory = categories?.find(
       (category) => category.name === value
     );
 
+    if (!selectedCategory) return;
+
     props.setSelectedCategory(selectedCategory);
+    props.setLoading(true);
+
+    await TriviaApi.getQuestionCountForCategory(selectedCategory.id)
+      .then((res: AvailableQuestionsResponse) =>
+        props.setAvailableQuestions(res)
+      )
+      .catch((e: any) => setError(e))
+      .finally(() => props.setLoading(false));
   };
 
   const sortedCategoryNames = categories
@@ -51,6 +66,7 @@ const Categories: FC<CategoriesProps> = (props) => {
   return (
     <div className="drop-down-container">
       <Dropdown
+        disabled={!sortedCategoryNames}
         options={sortedCategoryNames}
         placeholder="Category"
         selectedOption={props.selectedCategory?.name}
