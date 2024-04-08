@@ -21,13 +21,23 @@ const Categories: FC<CategoriesProps> = (props) => {
   const [error, setError] = useState<undefined | string>(undefined);
 
   useEffect(() => {
+    loadCategories();
+    /* 
+      I don't like disabling eslint like this,
+      but an empty dependency array still seems to be considered the standard way to call a function on mount of a component,
+      so I'm sticking with it for now
+    */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const loadCategories = () => {
     props.setLoading(true);
 
     TriviaApi.getCategories()
       .then((categories: Category[]) => setCategories(categories))
       .catch((e: any) => setError(e))
       .finally(() => props.setLoading(false));
-  }, []);
+  };
 
   const handleSelection = async (value: string) => {
     setError(undefined);
