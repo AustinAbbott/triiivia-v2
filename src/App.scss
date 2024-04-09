@@ -23,14 +23,13 @@
 }
 
 .divider {
-  animation: line-grow 1.5s ease-in-out forwards;
   background-color: #f1e3e3;
   height: 3px;
   left: 50%;
   max-width: 700px;
   position: absolute;
   transform: translateX(-50%);
-  width: 0;
+  width: 85vw;
 
   &#top {
     top: 20px;
@@ -41,24 +40,14 @@
   }
 }
 
-@keyframes line-grow {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 85vw;
-  }
-}
-
 .divider-loading {
-  height: 15px;
+  min-height: 9px;
+  --c: no-repeat linear-gradient(#f1e3e3 0 0);
+  background: var(--c), var(--c), var(--c), var(--c);
+  background-size: 25% 3px;
+  animation: l6 1s infinite;
   width: 85vw;
   max-width: 700px;
-  --c: no-repeat
-    repeating-linear-gradient(#0000 0 6px, #f1e3e3 0 9px, #0000 0 15px);
-  background: var(--c), var(--c), var(--c), var(--c);
-  background-size: 25% 200%;
-  animation: l4 1.5s infinite linear;
   position: absolute;
 
   &#top {
@@ -70,27 +59,23 @@
   }
 }
 
-@keyframes l4 {
+@keyframes l6 {
   0%,
   70%,
   100% {
-    background-position: calc(0 * 100% / 3) 100%, calc(1 * 100% / 3) 100%,
-      calc(2 * 100% / 3) 100%, calc(3 * 100% / 3) 100%;
+    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
+      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
   }
-  17.5% {
+  23.33% {
     background-position: calc(0 * 100% / 3) 0, calc(1 * 100% / 3) 100%,
-      calc(2 * 100% / 3) 100%, calc(3 * 100% / 3) 100%;
-  }
-  35% {
-    background-position: calc(0 * 100% / 3) 0, calc(1 * 100% / 3) 0,
-      calc(2 * 100% / 3) 100%, calc(3 * 100% / 3) 100%;
-  }
-  52.5% {
-    background-position: calc(0 * 100% / 3) 0, calc(1 * 100% / 3) 0,
       calc(2 * 100% / 3) 0, calc(3 * 100% / 3) 100%;
   }
+  46.67% {
+    background-position: calc(1 * 100% / 3) 0, calc(0 * 100% / 3) 100%,
+      calc(3 * 100% / 3) 0, calc(2 * 100% / 3) 100%;
+  }
   69.99% {
-    background-position: calc(0 * 100% / 3) 0, calc(1 * 100% / 3) 0,
-      calc(2 * 100% / 3) 0, calc(3 * 100% / 3) 0;
+    background-position: calc(1 * 100% / 3) 50%, calc(0 * 100% / 3) 50%,
+      calc(3 * 100% / 3) 50%, calc(2 * 100% / 3) 50%;
   }
 }
