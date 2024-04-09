@@ -21,7 +21,7 @@ const Categories: FC<CategoriesProps> = (props) => {
   const [error, setError] = useState<undefined | string>(undefined);
 
   useEffect(() => {
-    loadCategories();
+    setTimeout(loadCategories, 1000);
     /* 
       I don't like disabling eslint like this,
       but an empty dependency array still seems to be considered the standard way to call a function on mount of a component,
@@ -39,7 +39,7 @@ const Categories: FC<CategoriesProps> = (props) => {
       .finally(() => props.setLoading(false));
   };
 
-  const handleSelection = async (value: string) => {
+  const getCategoriesForSelection = async (value: string) => {
     setError(undefined);
 
     const selectedCategory = categories?.find(
@@ -49,7 +49,6 @@ const Categories: FC<CategoriesProps> = (props) => {
     if (!selectedCategory) return;
 
     props.setSelectedCategory(selectedCategory);
-    props.setLoading(true);
 
     await TriviaApi.getQuestionCountForCategory(selectedCategory.id)
       .then((res: AvailableQuestionsResponse) =>
@@ -57,6 +56,11 @@ const Categories: FC<CategoriesProps> = (props) => {
       )
       .catch((e: any) => setError(e))
       .finally(() => props.setLoading(false));
+  };
+
+  const handleSelection = async (value: string): Promise<void> => {
+    props.setLoading(true);
+    setTimeout(() => getCategoriesForSelection(value), 1000);
   };
 
   const sortedCategoryNames = categories

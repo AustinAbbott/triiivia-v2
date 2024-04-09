@@ -42,7 +42,7 @@ export const Setup: FC<SetupProps> = (props) => {
     );
   };
 
-  const handleStartClick = async (): Promise<void> => {
+  const fetchQuestions = async (): Promise<void> => {
     const requestUrl = `api.php?amount=${selectedNumberOfQuestions}&category=${
       selectedCategory?.id
     }&difficulty=${selectedDifficulty.toLowerCase()}&type=${Utils.getSelectedModeParam(
@@ -54,6 +54,11 @@ export const Setup: FC<SetupProps> = (props) => {
       .then((response) => props.setQuestions(response))
       .catch((e) => props.setApiError(e))
       .finally(() => props.setLoading(false));
+  };
+
+  const handleStartClick = async (): Promise<void> => {
+    props.setLoading(true);
+    setTimeout(fetchQuestions, 1000);
   };
 
   return (
