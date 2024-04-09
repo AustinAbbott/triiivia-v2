@@ -22,7 +22,8 @@
   justify-content: center;
 }
 
-.divider {
+.divider,
+.divider-loading {
   background-color: #f1e3e3;
   height: 3px;
   left: 50%;
@@ -41,22 +42,11 @@
 }
 
 .divider-loading {
-  min-height: 9px;
+  height: 9px;
   --c: no-repeat linear-gradient(#f1e3e3 0 0);
   background: var(--c), var(--c), var(--c), var(--c);
   background-size: 25% 3px;
   animation: l6 1s infinite;
-  width: 85vw;
-  max-width: 700px;
-  position: absolute;
-
-  &#top {
-    top: 20px;
-  }
-
-  &#bottom {
-    bottom: 20px;
-  }
 }
 
 @keyframes l6 {
