@@ -15,6 +15,8 @@ import StartButton from "../../components/StartButton";
 import Utils from "../../utils/utils";
 
 type SetupProps = {
+  loading: boolean;
+  setLoading: (arg: boolean) => void;
   setQuestions: (arg: QuestionResponse[]) => void;
 };
 
@@ -22,7 +24,6 @@ export const Setup: FC<SetupProps> = (props) => {
   const [availableQuestions, setAvailableQuestions] = useState<
     undefined | AvailableQuestionsResponse
   >(undefined);
-  const [loading, setLoading] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<
     undefined | Category
   >(undefined);
@@ -47,19 +48,20 @@ export const Setup: FC<SetupProps> = (props) => {
       selectedMode
     )}&encode=base64`;
 
-    setLoading(true);
+    props.setLoading(true);
     const apiResponse = await TriviaApi.getQuestions(requestUrl);
-    setLoading(false);
+    props.setLoading(false);
+
     props.setQuestions(apiResponse);
   };
 
   return (
     <div className="setup-container">
       <Categories
-        loading={loading}
+        loading={props.loading}
         selectedCategory={selectedCategory}
         setAvailableQuestions={setAvailableQuestions}
-        setLoading={setLoading}
+        setLoading={props.setLoading}
         setSelectedCategory={setSelectedCategory}
       />
       <Difficulty
@@ -82,13 +84,10 @@ export const Setup: FC<SetupProps> = (props) => {
       />
 
       <StartButton
-        loading={loading}
+        loading={props.loading}
         readyToGo={readyToGo()}
         handleStartClick={handleStartClick}
       />
-
-      {/* TODO: Make prettier loading behavior */}
-      {loading && <div>Loading...</div>}
     </div>
   );
 };

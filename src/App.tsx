@@ -6,14 +6,21 @@ import { QuestionResponse } from "./constants";
 
 function App() {
   const [questions, setQuestions] = useState<QuestionResponse[] | undefined>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <div className="App">
-      <div className="divider" id="top"></div>
+      <div className={loading ? "divider-loading" : "divider"} id="top"></div>
       <header className="App-header">
         <h1>triiivia</h1>
       </header>
-      {!questions?.length && <Setup setQuestions={setQuestions} />}
+      {!questions?.length && (
+        <Setup
+          loading={loading}
+          setLoading={setLoading}
+          setQuestions={setQuestions}
+        />
+      )}
       {!!questions?.length && (
         <Game questions={questions} setQuestions={setQuestions} />
       )}

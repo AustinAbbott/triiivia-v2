@@ -32,6 +32,10 @@
   transform: translateX(-50%);
   animation: line-grow 1.5s ease-in-out forwards;
 
+  &-loading {
+    animation-iteration-count: infinite;
+  }
+
   &#top {
     top: 20px;
   }
