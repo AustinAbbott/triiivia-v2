@@ -31,13 +31,16 @@ function App() {
   return (
     <div className="App">
       <div className={loading ? "divider-loading" : "divider"} id="top"></div>
+
       <header className="App-header">
         <h1>triiivia</h1>
       </header>
       {getView()}
-      {!!questions && !questions.length && (
+
+      {!!questions && !questions.length && !loading && (
         <div>Sorry, we don't have any questions for those selections 😔</div>
       )}
+
       {!!apiError && <div>Sorry, something went wrong</div>}
       <div
         className={loading ? "divider-loading" : "divider"}

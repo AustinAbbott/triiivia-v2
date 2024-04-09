@@ -23,18 +23,14 @@
 }
 
 .divider {
-  background-color: #f1e3e3;
-  height: 2px;
-  max-width: 700px;
-  width: 0;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   animation: line-grow 1.5s ease-in-out forwards;
-
-  &-loading {
-    animation-iteration-count: infinite;
-  }
+  background-color: #f1e3e3;
+  height: 3px;
+  left: 50%;
+  max-width: 700px;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 0;
 
   &#top {
     top: 20px;
