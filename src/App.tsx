@@ -6,7 +6,27 @@ import { QuestionResponse } from "./constants";
 
 function App() {
   const [questions, setQuestions] = useState<QuestionResponse[] | undefined>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [apiError, setApiError] = useState<any>(undefined);
+
+  const getView = () => {
+    if (!questions?.length) {
+      return (
+        <Setup
+          loading={loading}
+          setApiError={setApiError}
+          setLoading={setLoading}
+          setQuestions={setQuestions}
+        />
+      );
+    }
+
+    if (questions.length) {
+      return <Game questions={questions} setQuestions={setQuestions} />;
+    }
+
+    return null;
+  };
 
   return (
     <div className="App">
@@ -14,20 +34,15 @@ function App() {
       <header className="App-header">
         <h1>triiivia</h1>
       </header>
-      {!questions?.length && (
-        <Setup
-          loading={loading}
-          setLoading={setLoading}
-          setQuestions={setQuestions}
-        />
-      )}
-      {!!questions?.length && (
-        <Game questions={questions} setQuestions={setQuestions} />
-      )}
+      {getView()}
       {!!questions && !questions.length && (
         <div>Sorry, we don't have any questions for those selections 😔</div>
       )}
-      <div className="divider" id="bottom"></div>
+      {!!apiError && <div>Sorry, something went wrong</div>}
+      <div
+        className={loading ? "divider-loading" : "divider"}
+        id="bottom"
+      ></div>
     </div>
   );
 }

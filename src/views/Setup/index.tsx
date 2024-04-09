@@ -16,6 +16,7 @@ import Utils from "../../utils/utils";
 
 type SetupProps = {
   loading: boolean;
+  setApiError: (arg: any) => void;
   setLoading: (arg: boolean) => void;
   setQuestions: (arg: QuestionResponse[]) => void;
 };
@@ -49,10 +50,10 @@ export const Setup: FC<SetupProps> = (props) => {
     )}&encode=base64`;
 
     props.setLoading(true);
-    const apiResponse = await TriviaApi.getQuestions(requestUrl);
-    props.setLoading(false);
-
-    props.setQuestions(apiResponse);
+    TriviaApi.getQuestions(requestUrl)
+      .then((response) => props.setQuestions(response))
+      .catch((e) => props.setApiError(e))
+      .finally(() => props.setLoading(false));
   };
 
   return (

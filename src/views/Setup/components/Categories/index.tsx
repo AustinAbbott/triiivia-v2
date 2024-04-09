@@ -73,7 +73,7 @@ const Categories: FC<CategoriesProps> = (props) => {
         setSelectedOption={handleSelection}
         testId="Categories"
       />
-      {error && (
+      {!!error && (
         <div className="error-message">
           Oops, something went wrong while fetching categories
         </div>
