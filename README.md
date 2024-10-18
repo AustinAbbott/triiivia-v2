@@ -2,4 +2,4 @@
 
 #### A minimalist web app to play trivia
 
-![Example of answered trivia question](./public/triiivia-multi-question.jpg)
+Built with React, TypeScript, and [Open Trivia Database](https://opentdb.com/)
