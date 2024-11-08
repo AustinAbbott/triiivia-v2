@@ -4,7 +4,8 @@
   "packageRules": [
     {
       "description": "Automerge dev dependencies (if tests pass)",
-      "matchDepTypes": ["devDependencies"]
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
     }
   ],
   "commitMessagePrefix": "🔧"
