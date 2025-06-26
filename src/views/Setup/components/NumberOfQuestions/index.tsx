@@ -19,7 +19,7 @@ const NumberOfQuestions: FC<NumberOfQuestionsProps> = (props) => {
         disabled={props.disabled}
         options={Utils.generateNumberOfQuestions(
           props.availableQuestions,
-          props.selectedDifficulty
+          props.selectedDifficulty,
         )}
         placeholder="Number of Questions"
         selectedOption={props.selectedNumberOfQuestions}

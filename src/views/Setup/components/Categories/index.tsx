@@ -16,7 +16,7 @@ type CategoriesProps = {
 
 const Categories: FC<CategoriesProps> = (props) => {
   const [categories, setCategories] = useState<undefined | Category[]>(
-    undefined
+    undefined,
   );
   const [error, setError] = useState<undefined | string>(undefined);
 
@@ -43,7 +43,7 @@ const Categories: FC<CategoriesProps> = (props) => {
     setError(undefined);
 
     const selectedCategory = categories?.find(
-      (category) => category.name === value
+      (category) => category.name === value,
     );
 
     if (!selectedCategory) return;
@@ -53,7 +53,7 @@ const Categories: FC<CategoriesProps> = (props) => {
 
     await TriviaApi.getQuestionCountForCategory(selectedCategory.id)
       .then((res: AvailableQuestionsResponse) =>
-        props.setAvailableQuestions(res)
+        props.setAvailableQuestions(res),
       )
       .catch((e: any) => setError(e))
       .finally(() => props.setLoading(false));

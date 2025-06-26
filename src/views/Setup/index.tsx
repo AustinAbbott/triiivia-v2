@@ -44,7 +44,7 @@ export const Setup: FC<SetupProps> = (props) => {
     const requestUrl = `api.php?amount=${selectedNumberOfQuestions}&category=${
       selectedCategory?.id
     }&difficulty=${selectedDifficulty.toLowerCase()}&type=${Utils.getSelectedModeParam(
-      selectedMode
+      selectedMode,
     )}&encode=base64`;
 
     setLoading(true);
