@@ -43,7 +43,7 @@ export const Game: FC<GameProps> = (props) => {
   const [cardIndex, setCardIndex] = useState<number>(0);
   const [state, update] = useReducer(
     (state: ScoreObject, pair: any) => ({ ...state, ...pair }),
-    { score: 0 },
+    { score: 0 }
   );
 
   if (!props.questions) return null;

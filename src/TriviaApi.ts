@@ -10,7 +10,7 @@ export default class TriviaApi {
 
   public static getQuestionCountForCategory = async (categoryId: number) => {
     const result = await fetch(
-      `${API_BASE_URL}api_count.php?category=${categoryId}`,
+      `${API_BASE_URL}api_count.php?category=${categoryId}`
     ).then((response) => response.json());
     return result;
   };
@@ -20,7 +20,7 @@ export default class TriviaApi {
     const questionResponseObject = await result.json();
     return questionResponseObject.results?.map(
       (questionObject: QuestionResponse) =>
-        Utils.decodeQuestionResponse(questionObject),
+        Utils.decodeQuestionResponse(questionObject)
     );
   };
 }

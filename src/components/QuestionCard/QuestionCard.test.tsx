@@ -27,7 +27,7 @@ describe("QuestionCard", () => {
             type: "unknown_type",
           } as unknown as QuestionResponse
         }
-      />,
+      />
     );
 
     expect(screen.queryByTestId("TrueOrFalseCard")).toBeNull();
@@ -44,7 +44,7 @@ describe("QuestionCard", () => {
             type: TypeResponse.TRUE_FALSE,
           } as QuestionResponse
         }
-      />,
+      />
     );
 
     expect(await screen.findByTestId("TrueOrFalseCard")).toBeInTheDocument();
@@ -61,7 +61,7 @@ describe("QuestionCard", () => {
             type: TypeResponse.MULTIPLE_CHOICE,
           } as QuestionResponse
         }
-      />,
+      />
     );
 
     expect(await screen.findByTestId("MultipleChoiceCard")).toBeInTheDocument();

@@ -26,7 +26,7 @@ describe("Game", () => {
         questions={[
           { incorrect_answers: ["Wrong answer"] } as QuestionResponse,
         ]}
-      />,
+      />
     );
     expect(await screen.findByTestId("Game")).toBeInTheDocument();
   });

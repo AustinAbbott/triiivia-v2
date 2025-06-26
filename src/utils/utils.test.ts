@@ -13,7 +13,7 @@ describe("Utils", () => {
 
     test(`returns "multiple" if the selected mode is MULTIPLE_CHOICE`, () => {
       expect(Utils.getSelectedModeParam(Modes.MULTIPLE_CHOICE)).toEqual(
-        "multiple",
+        "multiple"
       );
     });
 
@@ -46,7 +46,7 @@ describe("Utils", () => {
       mockAvailableQuestionsResponse.category_question_count.total_medium_question_count = 0;
 
       expect(
-        Utils.generateDifficultyLevels(mockAvailableQuestionsResponse),
+        Utils.generateDifficultyLevels(mockAvailableQuestionsResponse)
       ).toStrictEqual([DifficultyOptions.EASY]);
     });
 
@@ -55,7 +55,7 @@ describe("Utils", () => {
       mockAvailableQuestionsResponse.category_question_count.total_easy_question_count = 0;
 
       expect(
-        Utils.generateDifficultyLevels(mockAvailableQuestionsResponse),
+        Utils.generateDifficultyLevels(mockAvailableQuestionsResponse)
       ).toStrictEqual([DifficultyOptions.MEDIUM]);
     });
 
@@ -64,13 +64,13 @@ describe("Utils", () => {
       mockAvailableQuestionsResponse.category_question_count.total_medium_question_count = 0;
 
       expect(
-        Utils.generateDifficultyLevels(mockAvailableQuestionsResponse),
+        Utils.generateDifficultyLevels(mockAvailableQuestionsResponse)
       ).toStrictEqual([DifficultyOptions.HARD]);
     });
 
     test(`returns an array with all available options`, () => {
       expect(
-        Utils.generateDifficultyLevels(mockAvailableQuestionsResponse),
+        Utils.generateDifficultyLevels(mockAvailableQuestionsResponse)
       ).toStrictEqual([
         DifficultyOptions.EASY,
         DifficultyOptions.MEDIUM,

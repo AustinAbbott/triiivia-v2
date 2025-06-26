@@ -43,7 +43,7 @@ export default class Utils {
 
   public static generateNumberOfQuestions = (
     availableQuestions?: AvailableQuestionsResponse,
-    selectedDifficulty?: string,
+    selectedDifficulty?: string
   ): string[] => {
     let questionsCountForDifficulty: number = 0;
 
@@ -82,7 +82,7 @@ export default class Utils {
   };
 
   public static generateDifficultyLevels = (
-    availableQuestions?: AvailableQuestionsResponse,
+    availableQuestions?: AvailableQuestionsResponse
   ): DifficultyOptions[] => {
     const options: DifficultyOptions[] = [];
 
