@@ -1,12 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", ":automergeRequireAllStatusChecks"],
-  "packageRules": [
-    {
-      "description": "Automerge dev dependencies (if tests pass)",
-      "matchDepTypes": ["devDependencies"],
-      "automerge": true
-    }
-  ],
+  "automerge": true,
   "commitMessagePrefix": "🔧"
 }
