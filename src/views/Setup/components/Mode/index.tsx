@@ -5,8 +5,8 @@ import { Dropdown } from "../../../../components/Dropdown";
 
 type ModeProps = {
   disabled: boolean;
-  selectedMode?: string;
-  setSelectedMode: (arg: string) => void;
+  selectedMode?: Modes;
+  setSelectedMode: (arg: Modes) => void;
 };
 
 const Mode: FC<ModeProps> = (props) => {
