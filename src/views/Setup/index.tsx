@@ -6,6 +6,7 @@ import NumberOfQuestions from "./components/NumberOfQuestions";
 import {
   AvailableQuestionsResponse,
   Category,
+  Modes,
   QuestionResponse,
 } from "../../constants";
 import TriviaApi from "../../TriviaApi";
@@ -27,7 +28,7 @@ export const Setup: FC<SetupProps> = (props) => {
     undefined | Category
   >(undefined);
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("");
-  const [selectedMode, setSelectedMode] = useState<string>("");
+  const [selectedMode, setSelectedMode] = useState<Modes | "">("");
   const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =
     useState<string>("");
 
@@ -41,6 +42,8 @@ export const Setup: FC<SetupProps> = (props) => {
   };
 
   const handleStartClick = async (): Promise<void> => {
+    if (!selectedMode) return;
+
     const requestUrl = `api.php?amount=${selectedNumberOfQuestions}&category=${
       selectedCategory?.id
     }&difficulty=${selectedDifficulty.toLowerCase()}&type=${Utils.getSelectedModeParam(

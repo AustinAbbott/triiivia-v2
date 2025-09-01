@@ -30,14 +30,12 @@ export default class Utils {
     }
   };
 
-  public static getSelectedModeParam = (selectedMode: string): string => {
+  public static getSelectedModeParam = (selectedMode: Modes): string => {
     switch (selectedMode) {
       case Modes.MULTIPLE_CHOICE:
         return "multiple";
       case Modes.TRUE_FALSE:
         return "boolean";
-      default:
-        return "";
     }
   };
 

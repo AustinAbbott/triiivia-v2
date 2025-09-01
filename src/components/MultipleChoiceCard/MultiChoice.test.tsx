@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import MultipleChoiceCard from ".";
 import { QuestionResponse } from "../../constants";
 import userEvent from "@testing-library/user-event";
+import { ScoreContext } from "../../views/Game";
 
 describe("MultipleChoiceCard", () => {
   const mockProps = {
@@ -10,13 +11,23 @@ describe("MultipleChoiceCard", () => {
     incrementIndex: jest.fn(),
   };
 
+  const renderComponent = () => {
+    return render(
+      <ScoreContext.Provider
+        value={{ state: { score: 0 }, update: jest.fn() }}
+      >
+        <MultipleChoiceCard {...mockProps} />
+      </ScoreContext.Provider>
+    );
+  };
+
   test("mounts", () => {
-    render(<MultipleChoiceCard {...mockProps} />);
+    renderComponent();
     expect(screen.getByTestId("MultipleChoiceCard")).toBeTruthy();
   });
 
   test("renders each choice in a button", () => {
-    render(<MultipleChoiceCard {...mockProps} />);
+    renderComponent();
     const choiceButtons = screen.queryAllByRole("button");
 
     expect(choiceButtons[0]).toHaveTextContent("Choice 1");
@@ -27,12 +38,12 @@ describe("MultipleChoiceCard", () => {
 
   describe("Next Button", () => {
     test("is disabled by default", () => {
-      render(<MultipleChoiceCard {...mockProps} />);
+      renderComponent();
       expect(screen.getByTestId("MultipleChoiceNextButton")).toBeDisabled();
     });
 
     test("is enabled once the correct answer has been selected", async () => {
-      render(<MultipleChoiceCard {...mockProps} />);
+      renderComponent();
       const choiceButtons = screen.queryAllByRole("button");
       await userEvent.click(choiceButtons[2]);
       expect(screen.getByTestId("MultipleChoiceNextButton")).toBeEnabled();

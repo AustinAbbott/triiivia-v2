@@ -7,10 +7,6 @@ import Utils from "./utils";
 
 describe("Utils", () => {
   describe("getSelectedModeParam", () => {
-    test("returns an empty string by default", () => {
-      expect(Utils.getSelectedModeParam("")).toEqual("");
-    });
-
     test(`returns "multiple" if the selected mode is MULTIPLE_CHOICE`, () => {
       expect(Utils.getSelectedModeParam(Modes.MULTIPLE_CHOICE)).toEqual(
         "multiple"

@@ -1,18 +1,18 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./style.scss";
 
 import polygon from "../../polygon.svg";
 
-type DropdownProps = {
+type DropdownProps<T extends string> = {
   disabled?: boolean;
   placeholder: string;
-  options?: any[];
-  selectedOption?: string;
+  options?: T[];
+  selectedOption?: T | "";
   testId?: string;
-  setSelectedOption: (arg: any) => void;
+  setSelectedOption: (arg: T) => void;
 };
 
-export const Dropdown: FC<DropdownProps> = (props) => {
+export function Dropdown<T extends string>(props: DropdownProps<T>) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -20,7 +20,7 @@ export const Dropdown: FC<DropdownProps> = (props) => {
     document.addEventListener("mousedown", handleOutsideClick);
   }, []);
 
-  const handleSelection = (option: string) => {
+  const handleSelection = (option: T) => {
     props.setSelectedOption(option);
     setIsOpen(false);
   };
@@ -62,7 +62,7 @@ export const Dropdown: FC<DropdownProps> = (props) => {
       <div className="drop-down-list-container">
         <div className="drop-down-list">
           {isOpen &&
-            props.options?.map((option: string) => (
+            props.options?.map((option: T) => (
               <button
                 className="drop-down-button"
                 key={option + Math.random()}
