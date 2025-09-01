@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./style.scss";
 
 import polygon from "../../polygon.svg";
@@ -7,7 +7,7 @@ type DropdownProps<T extends string> = {
   disabled?: boolean;
   placeholder: string;
   options?: T[];
-  selectedOption?: T;
+  selectedOption?: T | "";
   testId?: string;
   setSelectedOption: (arg: T) => void;
 };

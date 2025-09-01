@@ -11,7 +11,9 @@ describe("TrueOrFalseCard", () => {
 
   const renderComponent = () => {
     return render(
-      <ScoreContext.Provider value={{ score: 0, setScore: jest.fn() }}>
+      <ScoreContext.Provider
+        value={{ state: { score: 0 }, update: jest.fn() }}
+      >
         <TrueOrFalseCard {...mockProps} />
       </ScoreContext.Provider>
     );
