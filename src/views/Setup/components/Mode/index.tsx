@@ -5,14 +5,14 @@ import { Dropdown } from "../../../../components/Dropdown";
 
 type ModeProps = {
   disabled: boolean;
-  selectedMode?: string;
-  setSelectedMode: (arg: string) => void;
+  selectedMode: Modes | "";
+  setSelectedMode: (arg: Modes) => void;
 };
 
 const Mode: FC<ModeProps> = (props) => {
   return (
     <div className="drop-down-container">
-      <Dropdown
+      <Dropdown<Modes>
         disabled={props.disabled}
         options={[Modes.MULTIPLE_CHOICE, Modes.TRUE_FALSE]}
         placeholder="Mode"
